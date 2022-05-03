@@ -14,7 +14,7 @@ import {
   IconBrandGithub,
 } from '@tabler/icons'
 import moment from 'moment'
-import { v4 as uuidv4 } from 'uuid'
+import helpers from './helpers'
 import { useMyCopy } from '@/hooks'
 import { Scrollbars } from 'react-custom-scrollbars-2'
 import { saveAs } from 'file-saver'
@@ -24,33 +24,8 @@ const defaultTemplate = `{{#each data}}
 {{! Your code here}}
 {{/each}}`
 
-Handlebars.registerHelper('toFixed', (val, precision) => {
-  switch (typeof val) {
-    case 'string':
-      return parseFloat(val).toFixed(precision)
-    case 'number':
-      return val.toFixed(precision)
-    default:
-      return ''
-  }
-})
+Handlebars.registerHelper(helpers)
 
-Handlebars.registerHelper('nanoid', (_) => nanoid())
-
-Handlebars.registerHelper(
-  'sqlInsert',
-  (tn: string, items: Array<Record<string, unknown>>) => {
-    return items
-      .map(
-        (item) => `INSERT INTO ${tn} VALUES (${Object.values(item).join(',')});`
-      )
-      .join('\n')
-  }
-)
-
-Handlebars.registerHelper('trimEnd', (val: string) => val.trimEnd())
-
-Handlebars.registerHelper('uuid', (_) => uuidv4().replaceAll('-', ''))
 const App = () => {
   const onDrop = useCallback((acceptedFiles: File[]) => {
     setSelectedFile(acceptedFiles[0])
