@@ -1,0 +1,16 @@
+.font-code {
+  font-family: 'DejaVu Sans Mono', 'Courier Prime Code', 'Courier New', Courier, monospace;
+  @apply text-lg;
+}
+
+.section {
+  @apply w-full my-2 py-1 px-2;
+}
+
+.left-panel {
+  @apply w-2/5;
+}
+
+.right-panel {
+  @apply w-2/5;
+}
