@@ -190,7 +190,7 @@ const App = () => {
             <a
               href={'https://github.com/rexcape/rxofclock'}
               target={'_blank'}
-              className={'btn btn-ghost'}
+              className={'btn btn-ghost ml-2'}
             >
               <IconBrandGithub />
             </a>
@@ -352,11 +352,11 @@ const App = () => {
                   </div>
                   <div
                     data-tip={'Copy result to clipboard'}
-                    className={'tooltip ml-4'}
+                    className={'tooltip ml-2'}
                   >
                     <button
                       onClick={handleCopy}
-                      className={'btn btn-square btn-ghost btn-sm '}
+                      className={'btn btn-square btn-ghost btn-sm'}
                     >
                       <IconCopy size={20} />
                     </button>
