@@ -3,8 +3,7 @@ import { useDropzone } from 'react-dropzone'
 import Handlebars from 'handlebars'
 import { utils, read as readXlsx } from 'xlsx'
 import Swal from 'sweetalert2'
-import { nanoid } from 'nanoid'
-import { SheetHelper } from '@/components'
+import { SheetHelper, TemplateEditor } from '@/components'
 import {
   IconCopy,
   IconBolt,
@@ -258,7 +257,7 @@ const App = () => {
                 </span>
               </label>
               <div className={'w-full h-80 mt-2 relative'}>
-                <div className={'absolute right-6 top-4 flex flex-row'}>
+                <div className={'absolute right-12 top-4 flex flex-row z-20'}>
                   <div
                     data-tip={'Download current template'}
                     className={'tooltip'}
@@ -282,14 +281,15 @@ const App = () => {
                     </button>
                   </div>
                 </div>
-                <textarea
+                <TemplateEditor defaultVal={template} onChange={setTemplate} />
+                {/* <textarea
                   id={'template'}
                   className={
                     'textarea textarea-bordered w-full h-80 font-code resize-none'
                   }
                   value={template}
                   onChange={(e) => setTemplate(e.target.value)}
-                ></textarea>
+                ></textarea> */}
               </div>
             </div>
           </div>
@@ -316,7 +316,7 @@ const App = () => {
                 </span>
               </label>
               <div className={'result-container w-full h-80 mt-2 relative'}>
-                <div className={'absolute right-6 top-4'}>
+                <div className={'absolute right-12 top-4'}>
                   <div data-tip={'Download result'} className={'tooltip'}>
                     <button
                       onClick={handleDownloadResult}
