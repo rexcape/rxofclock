@@ -1,4 +1,5 @@
 import Editor, { OnChange } from '@monaco-editor/react'
+import { Ring } from '@uiball/loaders'
 
 export interface TemplateEditorProps {
   defaultVal: string
@@ -24,7 +25,7 @@ export const TemplateEditor = (props: TemplateEditorProps) => {
           enabled: false,
         },
       }}
-      loading={<progress className={'progress w-56'} />}
+      loading={<Ring size={40} lineWeight={5} speed={2} color={'black'} />}
     />
   )
 }
