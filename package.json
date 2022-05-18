@@ -8,10 +8,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@monaco-editor/react": "^4.4.5",
     "@tabler/icons": "^1.68.0",
     "file-saver": "^2.0.5",
     "handlebars": "^4.7.7",
     "moment": "^2.29.3",
+    "monaco-editor": "^0.33.0",
     "nanoid": "^3.3.3",
     "react": "^17.0.0",
     "react-custom-scrollbars-2": "^4.4.0",
