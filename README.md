@@ -2,17 +2,23 @@
 
 [![MIT-LICENSE](https://img.shields.io/github/license/rexcape/rxofclock?style=for-the-badge)](https://github.com/rexcape/rxofclock/LICENSE)
 
-[![Vercel](https://img.shields.io/badge/DEPLOYED%20BY%20Vercel-000000.svg?style=for-the-badge&logo=Vercel&labelColor=000)](https://vercel.com)
+[![Vercel](https://img.shields.io/badge/DEPLOYED%20WITH%20Vercel-000000.svg?style=for-the-badge&logo=Vercel&labelColor=000)](https://vercel.com)
 
 Rxofclock is a useless tool for converting xlsx files into **any text** you need.
 
 **WARNING: This tool is useless in most situations, only in specific situations can save a lot of time and repeat work.**
+
+## Demo
+
+This project is a SPA application, you can visit the [application page](https://rxofclock.vercel.app) for demo.
 
 ## Docs
 
 See [rxofclock-docs](https://rxofclock-docs.vercel.app)
 
 ## Quick Start
+
+enter the [application page](https://rxofclock.vercel.app)
 
 example sheet
 
@@ -42,6 +48,7 @@ The price of banana is 15
 - [x] Copy template and result
 - [x] Download template and result
 - [x] Load template from local text file
+- [ ] Load template from url with fetch API, save recent urls
 - [ ] Save and load templates into localStorage
 - [ ] Register custom helpers
 
