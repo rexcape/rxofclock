@@ -21,7 +21,7 @@ export const SheetHelper = ({ cols }: { cols: string[] | null }) => {
     <>
       <button
         className={
-          'btn btn-sm btn-square btn-ghost fixed bottom-4 right-8 z-10'
+          'btn btn-sm btn-square btn-ghost fixed bottom-4 right-8 z-20'
         }
         onClick={() => setShow(!show)}
       >
@@ -30,7 +30,7 @@ export const SheetHelper = ({ cols }: { cols: string[] | null }) => {
       {show && (
         <div
           className={
-            'card card-bordered glass w-1/3 h-96 fixed bottom-16 right-8 z-10'
+            'card card-bordered glass w-1/3 h-96 fixed bottom-16 right-8 z-20'
           }
         >
           <div className={'card-body'}>

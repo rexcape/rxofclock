@@ -2,12 +2,12 @@ import Editor, { OnChange } from '@monaco-editor/react'
 import { Ring } from '@uiball/loaders'
 
 export interface TemplateEditorProps {
-  defaultVal: string
+  value: string
   onChange: (s: string) => void
 }
 
 export const TemplateEditor = (props: TemplateEditorProps) => {
-  const { defaultVal, onChange } = props
+  const { value, onChange } = props
 
   const handleChange: OnChange = (val) => {
     onChange(val || '')
@@ -17,7 +17,7 @@ export const TemplateEditor = (props: TemplateEditorProps) => {
     <Editor
       className={'p-1 px-4 border border-base-300 rounded-lg'}
       defaultLanguage={'handlebars'}
-      defaultValue={defaultVal}
+      value={value}
       onChange={handleChange}
       options={{
         tabSize: 2,

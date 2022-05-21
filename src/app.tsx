@@ -3,7 +3,7 @@ import { useDropzone } from 'react-dropzone'
 import Handlebars from 'handlebars'
 import { utils, read as readXlsx } from 'xlsx'
 import Swal from 'sweetalert2'
-import { SheetHelper, TemplateEditor } from '@/components'
+import { SheetHelper, TemplateEditor, UploadOverlay } from '@/components'
 import {
   IconCopy,
   IconBolt,
@@ -11,6 +11,7 @@ import {
   IconDownload,
   IconExternalLink,
   IconBrandGithub,
+  IconUpload,
 } from '@tabler/icons'
 import moment from 'moment'
 import helpers from './helpers'
@@ -257,6 +258,7 @@ const App = () => {
                 </span>
               </label>
               <div className={'w-full h-80 mt-2 relative'}>
+                <UploadOverlay setTemplate={setTemplate} />
                 <div className={'absolute right-12 top-4 flex flex-row z-20'}>
                   <div
                     data-tip={'Download current template'}
@@ -281,15 +283,7 @@ const App = () => {
                     </button>
                   </div>
                 </div>
-                <TemplateEditor defaultVal={template} onChange={setTemplate} />
-                {/* <textarea
-                  id={'template'}
-                  className={
-                    'textarea textarea-bordered w-full h-80 font-code resize-none'
-                  }
-                  value={template}
-                  onChange={(e) => setTemplate(e.target.value)}
-                ></textarea> */}
+                <TemplateEditor value={template} onChange={setTemplate} />
               </div>
             </div>
           </div>
@@ -298,6 +292,15 @@ const App = () => {
             <button className={'btn gap-2'} onClick={handleGenerate}>
               <IconBolt size={20} />
               Generate
+            </button>
+            <button
+              className={'btn btn-secondary gap-2 ml-4'}
+              onClick={() => {
+                document.getElementById('template-select-root')?.click()
+              }}
+            >
+              <IconUpload size={20} />
+              Upload
             </button>
             <button
               className={'btn btn-primary gap-2 ml-4'}
