@@ -9,9 +9,9 @@ import {
   IconBolt,
   IconBraces,
   IconDownload,
-  IconExternalLink,
   IconBrandGithub,
   IconUpload,
+  IconLink,
 } from '@tabler/icons'
 import moment from 'moment'
 import helpers from './helpers'
@@ -157,15 +157,14 @@ const App = () => {
             <a
               href={'https://rxofclock-docs.vercel.app'}
               target={'_blank'}
-              className={'btn btn-ghost flex justify-center items-center'}
+              className={'link flex justify-center items-center'}
             >
               <span className={'text-lg'}>doc</span>
-              <IconExternalLink />
             </a>
             <a
               href={'https://github.com/rexcape/rxofclock'}
               target={'_blank'}
-              className={'btn btn-ghost ml-2'}
+              className={'btn btn-ghost btn-square ml-4'}
             >
               <IconBrandGithub />
             </a>
