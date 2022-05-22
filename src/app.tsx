@@ -3,7 +3,12 @@ import { useDropzone } from 'react-dropzone'
 import Handlebars from 'handlebars'
 import { utils, read as readXlsx } from 'xlsx'
 import Swal from 'sweetalert2'
-import { SheetHelper, TemplateEditor, UploadOverlay } from '@/components'
+import {
+  HelperEditor,
+  SheetHelper,
+  TemplateEditor,
+  UploadOverlay,
+} from '@/components'
 import {
   IconCopy,
   IconBolt,
@@ -23,6 +28,14 @@ import '@/styles/app.css'
 const defaultTemplate = `{{#each data}}
 {{! Your code here}}
 {{/each}}`
+
+const defaultHelper = `// Enter the code:
+// helper['testHelper'] = () => 'Test helper!'
+// Then use it in template section
+// {{testHelper}}
+// You will get the output
+// Test helper!
+`
 
 Handlebars.registerHelper(helpers)
 
@@ -44,6 +57,8 @@ const App = () => {
 
   const [template, setTemplate] = useState(defaultTemplate)
   const [output, setOutput] = useState('')
+  const [userHelper, setUserHelper] = useState(defaultHelper)
+  const [enableUserHelper, setEnableUserHelper] = useState(false)
   const [sheets, setSheets] = useState<string[] | null>(null)
   const [selectedSheet, setSelectedSheet] = useState<string | null>(null)
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
@@ -103,6 +118,11 @@ const App = () => {
     reader.readAsArrayBuffer(selectedFile)
   }, [selectedSheet, selectedFile])
 
+  useEffect(() => {
+    const storageUserHelper = localStorage.getItem('userHelper')
+    if (storageUserHelper) setUserHelper(storageUserHelper)
+  }, [])
+
   const handleGenerate = () => {
     if (!selectedFile) {
       Swal.fire({ icon: 'error', text: 'Select a file first' })
@@ -122,7 +142,16 @@ const App = () => {
         const data = utils.sheet_to_json<Record<string, string>>(
           readXlsx(res).Sheets[selectedSheet]
         )
-        setOutput(t({ data }))
+        let userHelpers: { [name: string]: Function } = {}
+        if (enableUserHelper) {
+          type HelperFunc = (helpers: { [name: string]: Function }) => void
+          const helperFunc = new Function(
+            'helpers',
+            `${userHelper}\nreturn helpers;`
+          ) as HelperFunc
+          helperFunc(userHelpers)
+        }
+        setOutput(t({ data }, { helpers: userHelpers }))
       }
       reader.readAsArrayBuffer(selectedFile)
     } catch (e) {
@@ -348,6 +377,32 @@ const App = () => {
                   readOnly
                 ></textarea>
               </div>
+            </div>
+          </div>
+
+          <div className={'section mb-10'}>
+            <div className={'form-control'}>
+              <div className={'flex items-center'}>
+                <input
+                  type={'checkbox'}
+                  className={'checkbox mr-2'}
+                  onChange={(e) => setEnableUserHelper(e.target.checked)}
+                />
+                <label htmlFor={'userHelper'}>
+                  <span
+                    className={'label-text uppercase text-xl font-semibold'}
+                  >
+                    custom helpers (JavaScript)
+                  </span>
+                </label>
+                <div className={'badge uppercase ml-2'}>experimental</div>
+              </div>
+            </div>
+            <div
+              hidden={!enableUserHelper}
+              className={'w-full h-80 mt-2 relative'}
+            >
+              <HelperEditor value={userHelper} onChange={setUserHelper} />
             </div>
           </div>
         </div>
