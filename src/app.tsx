@@ -16,7 +16,6 @@ import {
   IconDownload,
   IconBrandGithub,
   IconUpload,
-  IconLink,
 } from '@tabler/icons'
 import moment from 'moment'
 import helpers from './helpers'
@@ -30,8 +29,8 @@ const defaultTemplate = `{{#each data}}
 {{/each}}`
 
 const defaultHelper = `// Enter the code:
-// helper['testHelper'] = () => 'Test helper!'
-// Then use it in template section
+// helpers['testHelper'] = () => 'Test helper!'
+// Use it in template section
 // {{testHelper}}
 // You will get the output
 // Test helper!
