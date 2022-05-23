@@ -3,16 +3,6 @@ import Scrollbars from 'react-custom-scrollbars-2'
 import { useMyCopy } from '@/hooks'
 import { IconTool } from '@tabler/icons'
 
-const getTmpl = (cols: string[]) => {
-  const values = [
-    "'{{nanoid}}'",
-    ...cols.map((col) => `'{{[${col}]}}'`),
-    "'2022-03-29'",
-  ]
-
-  return `{{#each data}}\nINSERT INTO TABLE_NAME VALUES (${values});\n{{/each}}`
-}
-
 export const SheetHelper = ({ cols }: { cols: string[] | null }) => {
   const [show, setShow] = useState(false)
   const myCopy = useMyCopy()
@@ -45,22 +35,12 @@ export const SheetHelper = ({ cols }: { cols: string[] | null }) => {
                         <button
                           className={'tooltip font-bold text-lg'}
                           data-tip={'Click to copy'}
-                          onClick={() => myCopy(c)}
+                          onClick={() => myCopy(`{{[${c}]}}`)}
                         >
                           {c}
                         </button>
                       </li>
                     ))}
-                    <li className={'menu-title uppercase'}>templates</li>
-                    <li>
-                      <button
-                        className={'tooltip font-bold text-lg'}
-                        data-tip={'Click to copy'}
-                        onClick={() => myCopy(getTmpl(cols))}
-                      >
-                        QUICK INSERT SQL
-                      </button>
-                    </li>
                   </ul>
                 </>
               ) : (
