@@ -48,11 +48,20 @@ The price of banana is 15
 - [x] Copy template and result
 - [x] Download template and result
 - [x] Load template from local text file
-- [ ] Load template from url with fetch API, save recent urls
-- [ ] Save and load templates into localStorage
-- [ ] Register custom helpers
+- [ ] Load code from url with fetch API, save recent urls
+- [ ] Save and load code with localStorage
+- [x] Register custom helpers
+- [ ] Import online javascript libraries(such as [unpkg.com](https://unpkg.com)) in helper
+- [ ] (Refactor) Split app.tsx into isolated components
+- [ ] Dark mode support
 
 ## Contributing
+
+### Prerequisites
+
+The project requires Nodejs >= 12 and PNPM >= 6
+
+### Development
 
 Clone this repo
 
@@ -76,4 +85,6 @@ pnpm dev
 
 ## Acknowledgements
 
-Thanks Vercel for hosting this page free of charge. Vercel deployment is free for hobby.
+Thanks Vercel for hosting this page.
+
+This README.md was written with [readme.so](https://readme.so/)
