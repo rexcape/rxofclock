@@ -24,8 +24,7 @@ export const TemplateEditor = (props: TemplateEditorProps) => {
         minimap: {
           enabled: false,
         },
-        fontFamily: 'Code New Roman',
-        fontSize: 16
+        fontSize: 16,
       }}
       loading={<Ring size={40} lineWeight={5} speed={2} color={'black'} />}
     />
