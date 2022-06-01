@@ -53,7 +53,7 @@ The price of banana is 15
 - [x] Register custom helpers
 - [ ] Import online javascript libraries(such as [unpkg.com](https://unpkg.com)) in helper
 - [ ] (Refactor) Split app.tsx into isolated components
-- [ ] Dark mode support
+- [ ] ~~Dark mode support~~
 
 ## Contributing
 
