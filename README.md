@@ -62,7 +62,7 @@ The price of banana is 15
 
 ### Prerequisites
 
-The project requires Nodejs >= 12 and PNPM >= 6
+The project requires Nodejs >= 14 and PNPM >= 7
 
 ### Development
 
