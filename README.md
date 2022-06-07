@@ -48,7 +48,7 @@ The price of banana is 15
 - [x] Copy template and result
 - [x] Download template and result
 - [x] Load template from local text file
-- [ ] Load code from url with fetch API, save recent urls
+- [ ] ~~Load code from url with fetch API, save recent urls~~
 - [ ] Save and load code with localStorage
 - [x] Register custom helpers
 - [ ] Import online javascript libraries(such as [unpkg.com](https://unpkg.com)) in helper
