@@ -42,17 +42,20 @@ The price of apple is 10
 The price of banana is 15
 ```
 
-## TODO
+## TODO (or features)
 
 - [x] Basic features
 - [x] Copy template and result
 - [x] Download template and result
 - [x] Load template from local text file
-- [ ] ~~Load code from url with fetch API, save recent urls~~
 - [ ] Save and load code with localStorage
 - [x] Register custom helpers
-- [ ] Import online javascript libraries(such as [unpkg.com](https://unpkg.com)) in helper
 - [ ] (Refactor) Split app.tsx into isolated components
+
+### Useless features
+
+- [ ] ~~Import online javascript libraries(such as [unpkg.com](https://unpkg.com)) in helper~~
+- [ ] ~~Load code from url with fetch API, save recent urls~~
 - [ ] ~~Dark mode support~~
 
 ## Contributing
