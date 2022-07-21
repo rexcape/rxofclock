@@ -231,7 +231,7 @@ const App = () => {
                   <div
                     {...getRootProps({
                       className: [
-                        'h-20 w-full bg-base-100 dark:bg-slate-800 rounded-lg mt-2 text-xl font-semibold p-4',
+                        'h-20 w-full bg-base-100 rounded-lg mt-2 text-xl font-semibold p-4',
                         'flex justify-center items-center transition hover:bg-base-200 active:bg-base-300',
                         'focus:ring-2 focus:ring-offset-2 focus:ring-base-200 cursor-pointer',
                         'border-2 border-base-300 border-dotted',
