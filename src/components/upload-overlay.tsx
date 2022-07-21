@@ -35,7 +35,7 @@ export const UploadOverlay = ({ setTemplate }: UploadOverlayProps) => {
         })}
       >
         <input {...getInputProps({ id: 'template-select' })} />
-        <div className={'flex w-full h-full p-2 justify-center items-center font-semibold font-lg select-none'}>
+        <div className="flex w-full h-full p-2 justify-center items-center font-semibold font-lg select-none">
           {isDragActive ? (<p>Drop the template file here ...</p>):(<p>
             Drag template here or click to select
           </p>)}

@@ -15,8 +15,8 @@ export const TemplateEditor = (props: TemplateEditorProps) => {
 
   return (
     <Editor
-      className={'p-1 px-4 border border-base-300 rounded-lg'}
-      defaultLanguage={'handlebars'}
+      className="p-1 px-4 border border-base-300 rounded-lg"
+      defaultLanguage="handlebars"
       value={value}
       onChange={handleChange}
       options={{
@@ -26,7 +26,7 @@ export const TemplateEditor = (props: TemplateEditorProps) => {
         },
         fontSize: 16,
       }}
-      loading={<Ring size={40} lineWeight={5} speed={2} color={'black'} />}
+      loading={<Ring size={40} lineWeight={5} speed={2} color="black" />}
     />
   )
 }

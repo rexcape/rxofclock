@@ -179,31 +179,31 @@ const App = () => {
           height: '100vh',
         }}
       >
-        <div className={'navbar px-8'}>
-          <div className={'flex-1 font-semibold text-2xl'}>RXOFCLOCK</div>
-          <div className={'flex-none'}>
+        <div className="navbar px-8">
+          <div className="flex-1 font-semibold text-2xl">RXOFCLOCK</div>
+          <div className="flex-none">
             <a
-              href={'https://rxofclock-docs.vercel.app'}
-              target={'_blank'}
-              className={'link flex justify-center items-center'}
+              href="https://rxofclock-docs.vercel.app"
+              target="_blank"
+              className="link flex justify-center items-center"
             >
-              <span className={'text-lg'}>doc</span>
+              <span className="text-lg">doc</span>
             </a>
             <a
-              href={'https://github.com/rexcape/rxofclock'}
-              target={'_blank'}
-              className={'btn btn-ghost btn-square ml-4'}
+              href="https://github.com/rexcape/rxofclock"
+              target="_blank"
+              className="btn btn-ghost btn-square ml-4"
             >
               <IconBrandGithub />
             </a>
           </div>
         </div>
-        <div className={'container mx-auto w-[92%]'}>
+        <div className="container mx-auto w-[92%]">
           <SheetHelper cols={cols} />
-          <div className={'section'}>
-            <div className={'form-control'}>
-              <label htmlFor={'file-select'}>
-                <span className={'label-text uppercase text-xl font-semibold'}>
+          <div className="section">
+            <div className="form-control">
+              <label htmlFor="file-select">
+                <span className="label-text uppercase text-xl font-semibold">
                   file
                 </span>
               </label>
@@ -217,7 +217,7 @@ const App = () => {
                   >
                     <span>{selectedFile.name}</span>
                     <button
-                      className={'btn btn-outline ml-4'}
+                      className="btn btn-outline ml-4"
                       onClick={() => {
                         setSelectedFile(null)
                       }}
@@ -231,7 +231,7 @@ const App = () => {
                   <div
                     {...getRootProps({
                       className: [
-                        'h-20 w-full bg-base-100 dark:bg-slate-800 rounded-lg mt-2 text-xl font-semibold p-4',
+                        'h-20 w-full bg-base-100 rounded-lg mt-2 text-xl font-semibold p-4',
                         'flex justify-center items-center transition hover:bg-base-200 active:bg-base-300',
                         'focus:ring-2 focus:ring-offset-2 focus:ring-base-200 cursor-pointer',
                         'border-2 border-base-300 border-dotted',
@@ -252,22 +252,22 @@ const App = () => {
             </div>
           </div>
 
-          <div className={'section'}>
-            <div className={'form-control'}>
-              <label htmlFor={'sheet'}>
-                <span className={'label-text uppercase text-xl font-semibold'}>
+          <div className="section">
+            <div className="form-control">
+              <label htmlFor="sheet">
+                <span className="label-text uppercase text-xl font-semibold">
                   sheet
                 </span>
               </label>
               <select
-                id={'sheet'}
-                className={'select select-bordered w-full mt-2 text-lg'}
+                id="sheet"
+                className="select select-bordered w-full mt-2 text-lg"
                 onChange={(e) => {
                   setSelectedSheet(e.target.value)
                 }}
-                defaultValue={'default'}
+                defaultValue="default"
               >
-                <option disabled value={'default'}>
+                <option disabled value="default">
                   Select a sheet
                 </option>
                 {sheets?.map((s, idx) => (
@@ -277,34 +277,34 @@ const App = () => {
             </div>
           </div>
 
-          <div className={'section'}>
-            <div className={'form-control'}>
-              <label htmlFor={'template'}>
-                <span className={'label-text uppercase text-xl font-semibold'}>
+          <div className="section">
+            <div className="form-control">
+              <label htmlFor="template">
+                <span className="label-text uppercase text-xl font-semibold">
                   template
                 </span>
               </label>
-              <div className={'w-full h-80 mt-2 relative'}>
+              <div className="w-full h-80 mt-2 relative">
                 <UploadOverlay setTemplate={setTemplate} />
-                <div className={'absolute right-12 top-4 flex flex-row z-20'}>
+                <div className="absolute right-12 top-4 flex flex-row z-20">
                   <div
-                    data-tip={'Download current template'}
-                    className={'tooltip'}
+                    data-tip="Download current template"
+                    className="tooltip"
                   >
                     <button
                       onClick={handleDownloadTemplate}
-                      className={'btn btn-square btn-ghost btn-sm '}
+                      className="btn btn-square btn-ghost btn-sm "
                     >
                       <IconDownload size={20} />
                     </button>
                   </div>
                   <div
-                    data-tip={'Copy template to clipboard'}
-                    className={'tooltip ml-2'}
+                    data-tip="Copy template to clipboard"
+                    className="tooltip ml-2"
                   >
                     <button
                       onClick={() => myCopy(template)}
-                      className={'btn btn-square btn-ghost btn-sm '}
+                      className="btn btn-square btn-ghost btn-sm "
                     >
                       <IconCopy size={20} />
                     </button>
@@ -315,13 +315,13 @@ const App = () => {
             </div>
           </div>
 
-          <div className={'section'}>
-            <button className={'btn gap-2'} onClick={handleGenerate}>
+          <div className="section">
+            <button className="btn gap-2" onClick={handleGenerate}>
               <IconBolt size={20} />
               Generate
             </button>
             <button
-              className={'btn btn-secondary gap-2 ml-4'}
+              className="btn btn-secondary gap-2 ml-4"
               onClick={() => {
                 document.getElementById('template-select-root')?.click()
               }}
@@ -330,7 +330,7 @@ const App = () => {
               Upload
             </button>
             <button
-              className={'btn btn-primary gap-2 ml-4'}
+              className="btn btn-primary gap-2 ml-4"
               onClick={handleReset}
             >
               <IconBraces size={20} />
@@ -338,37 +338,37 @@ const App = () => {
             </button>
           </div>
 
-          <div className={'section mb-10'}>
-            <div className={'form-control'}>
-              <label htmlFor={'result'}>
-                <span className={'label-text uppercase text-xl font-semibold'}>
+          <div className="section mb-10">
+            <div className="form-control">
+              <label htmlFor="result">
+                <span className="label-text uppercase text-xl font-semibold">
                   result
                 </span>
               </label>
-              <div className={'result-container w-full h-80 mt-2 relative'}>
-                <div className={'absolute right-12 top-4'}>
-                  <div data-tip={'Download result'} className={'tooltip'}>
+              <div className="result-container w-full h-80 mt-2 relative">
+                <div className="absolute right-12 top-4">
+                  <div data-tip="Download result" className="tooltip">
                     <button
                       onClick={handleDownloadResult}
-                      className={'btn btn-square btn-ghost btn-sm '}
+                      className="btn btn-square btn-ghost btn-sm "
                     >
                       <IconDownload size={20} />
                     </button>
                   </div>
                   <div
-                    data-tip={'Copy result to clipboard'}
-                    className={'tooltip ml-2'}
+                    data-tip="Copy result to clipboard"
+                    className="tooltip ml-2"
                   >
                     <button
                       onClick={handleCopy}
-                      className={'btn btn-square btn-ghost btn-sm'}
+                      className="btn btn-square btn-ghost btn-sm"
                     >
                       <IconCopy size={20} />
                     </button>
                   </div>
                 </div>
                 <textarea
-                  id={'result'}
+                  id="result"
                   className={
                     'textarea textarea-bordered w-full h-80 font-code resize-none'
                   }
@@ -379,27 +379,27 @@ const App = () => {
             </div>
           </div>
 
-          <div className={'section mb-10'}>
-            <div className={'form-control'}>
-              <div className={'flex items-center'}>
+          <div className="section mb-10">
+            <div className="form-control">
+              <div className="flex items-center">
                 <input
-                  type={'checkbox'}
-                  className={'checkbox mr-2'}
+                  type="checkbox"
+                  className="checkbox mr-2"
                   onChange={(e) => setEnableUserHelper(e.target.checked)}
                 />
-                <label htmlFor={'userHelper'}>
+                <label htmlFor="userHelper">
                   <span
-                    className={'label-text uppercase text-xl font-semibold'}
+                    className="label-text uppercase text-xl font-semibold"
                   >
                     custom helpers (JavaScript)
                   </span>
                 </label>
-                <div className={'badge uppercase ml-2'}>experimental</div>
+                <div className="badge uppercase ml-2">experimental</div>
               </div>
             </div>
             <div
               hidden={!enableUserHelper}
-              className={'w-full h-80 mt-2 relative'}
+              className="w-full h-80 mt-2 relative"
             >
               <HelperEditor value={userHelper} onChange={setUserHelper} />
             </div>

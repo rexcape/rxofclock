@@ -15,8 +15,8 @@ export const HelperEditor = (props: HelperEditorProps) => {
 
   return (
     <Editor
-      className={'p-1 px-4 border border-base-300 rounded-lg'}
-      defaultLanguage={'javascript'}
+      className="p-1 px-4 border border-base-300 rounded-lg"
+      defaultLanguage="javascript"
       value={value}
       onChange={handleChange}
       options={{
@@ -26,7 +26,7 @@ export const HelperEditor = (props: HelperEditorProps) => {
         },
         fontSize: 16,
       }}
-      loading={<Ring size={40} lineWeight={5} speed={2} color={'black'} />}
+      loading={<Ring size={40} lineWeight={5} speed={2} color="black" />}
     />
   )
 }
