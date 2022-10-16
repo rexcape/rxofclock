@@ -133,7 +133,7 @@ const App = () => {
     }
 
     try {
-      const t = Handlebars.compile(template)
+      const t = Handlebars.compile(template, { noEscape: true })
       const reader = new FileReader()
       reader.onload = (e) => {
         const res = e.target?.result
