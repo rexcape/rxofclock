@@ -211,7 +211,8 @@ const App = () => {
                 <>
                   <div
                     className={[
-                      'h-20 w-full bg-gray-200 dark:bg-slate-800 rounded-lg mt-2 font-code p-4',
+                      'h-20 w-full bg-gray-200 text-gray-900 dark:bg-slate-800 dark:text-gray-200',
+                      'rounded-lg mt-2 font-code p-4',
                       'flex justify-center items-center transition',
                     ].join(' ')}
                   >
@@ -287,10 +288,7 @@ const App = () => {
               <div className="w-full h-80 mt-2 relative">
                 <UploadOverlay setTemplate={setTemplate} />
                 <div className="absolute right-12 top-4 flex flex-row z-20">
-                  <div
-                    data-tip="Download current template"
-                    className="tooltip"
-                  >
+                  <div data-tip="Download current template" className="tooltip">
                     <button
                       onClick={handleDownloadTemplate}
                       className="btn btn-square btn-ghost btn-sm "
@@ -388,9 +386,7 @@ const App = () => {
                   onChange={(e) => setEnableUserHelper(e.target.checked)}
                 />
                 <label htmlFor="userHelper">
-                  <span
-                    className="label-text uppercase text-xl font-semibold"
-                  >
+                  <span className="label-text uppercase text-xl font-semibold">
                     custom helpers (JavaScript)
                   </span>
                 </label>
