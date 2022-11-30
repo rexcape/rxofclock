@@ -19,10 +19,11 @@ import {
 } from '@tabler/icons'
 import moment from 'moment'
 import helpers from './helpers'
-import { useMyCopy } from '@/hooks'
+import { useMyCopy, useResult, useCustomHelper } from '@/hooks'
 import { Scrollbars } from 'react-custom-scrollbars-2'
 import { saveAs } from 'file-saver'
 import '@/styles/app.css'
+import { CustomHelper, Result } from './modules'
 
 const defaultTemplate = `{{#each data}}
 {{! Your code here}}
@@ -55,8 +56,8 @@ const App = () => {
   })
 
   const [template, setTemplate] = useState(defaultTemplate)
-  const [output, setOutput] = useState('')
-  const [userHelper, setUserHelper] = useState(defaultHelper)
+  const { result, setResult } = useResult()
+  const { customHelper, setCustomHelper } = useCustomHelper()
   const [enableUserHelper, setEnableUserHelper] = useState(false)
   const [sheets, setSheets] = useState<string[] | null>(null)
   const [selectedSheet, setSelectedSheet] = useState<string | null>(null)
@@ -65,17 +66,13 @@ const App = () => {
   const myCopy = useMyCopy()
 
   const handleReset = () => {
-    setOutput('')
+    setResult('')
     setTemplate(defaultTemplate)
     setSelectedSheet(null)
     setSheets(null)
     setSelectedFile(null)
     setCols(null)
     location.reload()
-  }
-
-  const handleCopy = () => {
-    myCopy(output)
   }
 
   useEffect(() => {
@@ -119,7 +116,7 @@ const App = () => {
 
   useEffect(() => {
     const storageUserHelper = localStorage.getItem('userHelper')
-    if (storageUserHelper) setUserHelper(storageUserHelper)
+    if (storageUserHelper) setCustomHelper(storageUserHelper)
   }, [])
 
   const handleGenerate = () => {
@@ -146,11 +143,11 @@ const App = () => {
           type HelperFunc = (helpers: { [name: string]: Function }) => void
           const helperFunc = new Function(
             'helpers',
-            `${userHelper}\nreturn helpers;`
+            `${customHelper}\nreturn helpers;`
           ) as HelperFunc
           helperFunc(userHelpers)
         }
-        setOutput(t({ data }, { helpers: userHelpers }))
+        setResult(t({ data }, { helpers: userHelpers }))
       }
       reader.readAsArrayBuffer(selectedFile)
     } catch (e) {
@@ -162,12 +159,6 @@ const App = () => {
     const blob = new Blob([template], { type: 'text/plain;charset=utf-8' })
     saveAs(blob, `template_${moment().format('YYYY_MM_DD_HH:mm:ss')}.txt`)
   }
-
-  const handleDownloadResult = () => {
-    const blob = new Blob([output], { type: 'text/plain;charset=utf-8' })
-    saveAs(blob, `result_${moment().format('YYYY_MM_DD_HH:mm:ss')}.txt`)
-  }
-
   return (
     <>
       <Scrollbars
@@ -336,70 +327,9 @@ const App = () => {
             </button>
           </div>
 
-          <div className="section mb-10">
-            <div className="form-control">
-              <label htmlFor="result">
-                <span className="label-text uppercase text-xl font-semibold">
-                  result
-                </span>
-              </label>
-              <div className="result-container w-full h-80 mt-2 relative">
-                <div className="absolute right-12 top-4">
-                  <div data-tip="Download result" className="tooltip">
-                    <button
-                      onClick={handleDownloadResult}
-                      className="btn btn-square btn-ghost btn-sm "
-                    >
-                      <IconDownload size={20} />
-                    </button>
-                  </div>
-                  <div
-                    data-tip="Copy result to clipboard"
-                    className="tooltip ml-2"
-                  >
-                    <button
-                      onClick={handleCopy}
-                      className="btn btn-square btn-ghost btn-sm"
-                    >
-                      <IconCopy size={20} />
-                    </button>
-                  </div>
-                </div>
-                <textarea
-                  id="result"
-                  className={
-                    'textarea textarea-bordered w-full h-80 font-code resize-none'
-                  }
-                  value={output}
-                  readOnly
-                ></textarea>
-              </div>
-            </div>
-          </div>
+          <Result output={result} />
 
-          <div className="section mb-10">
-            <div className="form-control">
-              <div className="flex items-center">
-                <input
-                  type="checkbox"
-                  className="checkbox mr-2"
-                  onChange={(e) => setEnableUserHelper(e.target.checked)}
-                />
-                <label htmlFor="userHelper">
-                  <span className="label-text uppercase text-xl font-semibold">
-                    custom helpers (JavaScript)
-                  </span>
-                </label>
-                <div className="badge uppercase ml-2">experimental</div>
-              </div>
-            </div>
-            <div
-              hidden={!enableUserHelper}
-              className="w-full h-80 mt-2 relative"
-            >
-              <HelperEditor value={userHelper} onChange={setUserHelper} />
-            </div>
-          </div>
+          <CustomHelper helper={customHelper} setHelper={setCustomHelper} />
         </div>
       </Scrollbars>
     </>
