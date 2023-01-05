@@ -28,7 +28,7 @@ export const Result: FC<ResultProps> = ({ output }) => {
         </label>
         <div className="result-container w-full h-80 mt-2 relative">
           <div className="absolute right-1 top-1">
-            <div data-tip="Download result" className="tooltip">
+            <div data-tip="Download result" className="tooltip tooltip-left">
               <button
                 onClick={handleDownloadResult}
                 className="btn btn-square btn-ghost btn-sm "
@@ -36,7 +36,7 @@ export const Result: FC<ResultProps> = ({ output }) => {
                 <IconDownload size={20} />
               </button>
             </div>
-            <div data-tip="Copy result to clipboard" className="tooltip ml-2">
+            <div data-tip="Copy result to clipboard" className="tooltip tooltip-left ml-2">
               <button
                 onClick={handleCopy}
                 className="btn btn-square btn-ghost btn-sm"
@@ -47,9 +47,7 @@ export const Result: FC<ResultProps> = ({ output }) => {
           </div>
           <textarea
             id="result"
-            className={
-              'textarea textarea-bordered w-full h-80 font-code resize-none'
-            }
+            className="textarea textarea-bordered w-full h-80 font-mono text-lg resize-none"
             value={output}
             readOnly
           ></textarea>

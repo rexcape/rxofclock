@@ -14,7 +14,7 @@ export const CustomHelper: FC<CustomHelperProps> = ({ helper, setHelper }) => {
         <div className="flex items-center">
           <input
             type="checkbox"
-            className="checkbox mr-2"
+            className="toggle mr-2"
             onChange={(e) => setEnabled(e.target.checked)}
           />
           <label htmlFor="userHelper">

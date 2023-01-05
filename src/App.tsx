@@ -1,9 +1,14 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState, useContext } from 'react'
 import { useDropzone } from 'react-dropzone'
 import Handlebars from 'handlebars'
 import { utils, read as readXlsx } from 'xlsx'
 import Swal from 'sweetalert2'
-import { SheetHelper, TemplateEditor, UploadOverlay } from '@/components'
+import {
+  LowPerformanceToggler,
+  SheetHelper,
+  TemplateEditor,
+  UploadOverlay,
+} from '@/components'
 import {
   IconCopy,
   IconBolt,
@@ -146,175 +151,173 @@ const App = () => {
   }
   return (
     <>
-      <Scrollbars
-        autoHide
-        style={{
-          position: 'relative',
-          overflow: 'hidden',
-          width: '100%',
-          height: '100vh',
-        }}
-      >
-        <div className="navbar px-8">
+      <div className="h-screen w-full">
+        <div className="navbar px-8 border-b">
           <div className="flex-1 font-semibold text-2xl">RXOFCLOCK</div>
+          <LowPerformanceToggler />
         </div>
-        <div className="container mx-auto w-[92%]">
-          <SheetHelper cols={cols} />
-          <div className="section">
-            <div className="form-control">
-              <label htmlFor="file-select">
-                <span className="label-text uppercase text-xl font-semibold">
-                  file
-                </span>
-              </label>
-              {selectedFile ? (
-                <>
-                  <div
-                    className={[
-                      'h-20 w-full bg-gray-200 text-gray-900 rounded-lg mt-2 font-code p-4',
-                      'flex justify-center items-center transition',
-                    ].join(' ')}
-                  >
-                    <span className="font-sans">{selectedFile.name}</span>
-                    <button
-                      className="btn btn-ghost ml-4 font-sans"
-                      onClick={() => {
-                        setSelectedFile(null)
-                      }}
+        <Scrollbars autoHide style={{ width: '100%', height: '95vh' }}>
+          <div className="container mx-auto">
+            <SheetHelper cols={cols} />
+            <div className="section">
+              <div className="form-control">
+                <label htmlFor="file-select">
+                  <span className="label-text uppercase text-xl font-semibold">
+                    file
+                  </span>
+                </label>
+                {selectedFile ? (
+                  <>
+                    <div
+                      className={[
+                        'h-20 w-full bg-gray-200 text-gray-900 rounded-lg mt-2 font-mono text-lg p-4',
+                        'flex justify-center items-center transition',
+                      ].join(' ')}
                     >
-                      Reset
-                    </button>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div
-                    {...getRootProps({
-                      className: [
-                        'h-20 w-full bg-base-100 rounded-lg mt-2 text-xl font-semibold p-4',
-                        'flex justify-center items-center transition hover:bg-base-200 active:bg-base-300',
-                        'focus:ring-2 focus:ring-offset-2 focus:ring-base-200 cursor-pointer',
-                        'border-2 border-base-300 border-dotted',
-                      ].join(' '),
-                    })}
-                  >
-                    <input {...getInputProps({ id: 'file-select' })} />
-                    {isDragActive ? (
-                      <p>Drop the files here ...</p>
-                    ) : (
-                      <p>
-                        Drag a xlsx or xls file here, or click to select file
-                      </p>
-                    )}
-                  </div>
-                </>
-              )}
+                      <span className="font-sans">{selectedFile.name}</span>
+                      <button
+                        className="btn btn-ghost ml-4 font-sans"
+                        onClick={() => {
+                          setSelectedFile(null)
+                        }}
+                      >
+                        Reset
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div
+                      {...getRootProps({
+                        className: [
+                          'h-20 w-full bg-base-100 rounded-lg mt-2 text-xl font-semibold p-4',
+                          'flex justify-center items-center transition hover:bg-base-200 active:bg-base-300',
+                          'focus:ring-2 focus:ring-offset-2 focus:ring-base-200 cursor-pointer',
+                          'border-2 border-base-300 border-dotted',
+                        ].join(' '),
+                      })}
+                    >
+                      <input {...getInputProps({ id: 'file-select' })} />
+                      {isDragActive ? (
+                        <p>Drop the files here ...</p>
+                      ) : (
+                        <p>
+                          Drag a xlsx or xls file here, or click to select file
+                        </p>
+                      )}
+                    </div>
+                  </>
+                )}
+              </div>
             </div>
-          </div>
 
-          <div className="section">
-            <div className="form-control">
-              <label htmlFor="sheet">
-                <span className="label-text uppercase text-xl font-semibold">
-                  sheet
-                </span>
-              </label>
-              <select
-                id="sheet"
-                className="select select-bordered w-full mt-2 text-lg"
-                onChange={(e) => {
-                  setSelectedSheet(e.target.value)
-                }}
-                defaultValue="default"
-              >
-                <option disabled value="default">
-                  Select a sheet
-                </option>
-                {sheets?.map((s, idx) => (
-                  <option key={idx}>{s}</option>
-                ))}
-              </select>
+            <div className="section">
+              <div className="form-control">
+                <label htmlFor="sheet">
+                  <span className="label-text uppercase text-xl font-semibold">
+                    sheet
+                  </span>
+                </label>
+                <select
+                  id="sheet"
+                  className="select select-bordered w-full mt-2 text-lg"
+                  onChange={(e) => {
+                    setSelectedSheet(e.target.value)
+                  }}
+                  defaultValue="default"
+                >
+                  <option disabled value="default">
+                    Select a sheet
+                  </option>
+                  {sheets?.map((s, idx) => (
+                    <option key={idx}>{s}</option>
+                  ))}
+                </select>
+              </div>
             </div>
-          </div>
 
-          <div className="section">
-            <div className="form-control">
-              <label htmlFor="template">
-                <span className="label-text uppercase text-xl font-semibold">
-                  template
-                </span>
-              </label>
-              <div className="w-full h-100 mt-2 relative border border-base-200 rounded-lg">
-                <UploadOverlay setTemplate={setTemplate} />
-                <div className="absolute right-1 top-1 flex flex-row z-20">
-                  <div data-tip="Download current template" className="tooltip">
-                    <button
-                      onClick={handleDownloadTemplate}
-                      className="btn btn-square btn-ghost btn-sm "
+            <div className="section">
+              <div className="form-control">
+                <label htmlFor="template">
+                  <span className="label-text uppercase text-xl font-semibold">
+                    template
+                  </span>
+                </label>
+                <div className="w-full h-100 mt-2 relative border border-black border-opacity-20 rounded-lg">
+                  <UploadOverlay setTemplate={setTemplate} />
+                  <div className="absolute right-1 top-1 flex flex-row z-20">
+                    <div
+                      data-tip="Download current template"
+                      className="tooltip tooltip-left"
                     >
-                      <IconDownload size={20} />
-                    </button>
-                  </div>
-                  <div
-                    data-tip="Copy template to clipboard"
-                    className="tooltip ml-2"
-                  >
-                    <button
-                      onClick={() => myCopy(template)}
-                      className="btn btn-square btn-ghost btn-sm "
+                      <button
+                        onClick={handleDownloadTemplate}
+                        className="btn btn-square btn-ghost btn-sm "
+                      >
+                        <IconDownload size={20} />
+                      </button>
+                    </div>
+                    <div
+                      data-tip="Copy template to clipboard"
+                      className="tooltip tooltip-left ml-2"
                     >
-                      <IconCopy size={20} />
-                    </button>
+                      <button
+                        onClick={() => myCopy(template)}
+                        className="btn btn-square btn-ghost btn-sm "
+                      >
+                        <IconCopy size={20} />
+                      </button>
+                    </div>
                   </div>
-                </div>
-                <div className="h-10 bg-base-200 pl-5 rounded-t-lg flex items-center">
-                  <div className="font-mono text-md">{'{{#each data}}'}</div>
-                </div>
-                <TemplateEditor value={template} onChange={setTemplate} />
-                <div className="h-10 bg-base-200 pl-5 rounded-b-lg flex items-center">
-                  <div className="font-mono text-md">{'{{/each}}'}</div>
+                  <div className="h-10 bg-base-200 select-none pl-4 rounded-t-lg flex items-center">
+                    <div className="font-mono text-md">{'{{#each data}}'}</div>
+                  </div>
+                  <TemplateEditor value={template} onChange={setTemplate} />
+                  <div className="h-10 bg-base-200 select-none pl-4 rounded-b-lg flex items-center">
+                    <div className="font-mono text-md">{'{{/each}}'}</div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div className="section">
-            <div className="tooltip" data-tip="Convert data to text">
-              <button className="btn gap-2" onClick={handleGenerate}>
-                <IconBolt size={20} />
-                Generate
-              </button>
-            </div>
-            <div
-              className="tooltip"
-              data-tip="Select a local file as template content"
-            >
-              <button
-                className="btn btn-secondary gap-2 ml-4"
-                onClick={() => {
-                  document.getElementById('template-select-root')?.click()
-                }}
+            <div className="section">
+              <div className="tooltip" data-tip="Convert data to text">
+                <button className="btn gap-2" onClick={handleGenerate}>
+                  <IconBolt size={20} />
+                  Generate
+                </button>
+              </div>
+              <div
+                className="tooltip"
+                data-tip="Select a local file as template content"
               >
-                <IconUpload size={20} />
-                Select
-              </button>
+                <button
+                  className="btn btn-secondary gap-2 ml-4"
+                  onClick={() => {
+                    document.getElementById('template-select-root')?.click()
+                  }}
+                >
+                  <IconUpload size={20} />
+                  Select
+                </button>
+              </div>
+              <div className="tooltip" data-tip="Reset all states">
+                <button
+                  className="btn btn-primary gap-2 ml-4"
+                  onClick={handleReset}
+                >
+                  <IconBraces size={20} />
+                  Reset All
+                </button>
+              </div>
             </div>
-            <div className="tooltip" data-tip="Reset all states">
-              <button
-                className="btn btn-primary gap-2 ml-4"
-                onClick={handleReset}
-              >
-                <IconBraces size={20} />
-                Reset All
-              </button>
-            </div>
+
+            <Result output={result} />
+
+            <CustomHelper helper={customHelper} setHelper={setCustomHelper} />
           </div>
-
-          <Result output={result} />
-
-          <CustomHelper helper={customHelper} setHelper={setCustomHelper} />
-        </div>
-      </Scrollbars>
+        </Scrollbars>
+      </div>
     </>
   )
 }
