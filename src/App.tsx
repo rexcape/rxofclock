@@ -147,12 +147,12 @@ const App = () => {
   return (
     <>
       <div className="h-screen w-full">
-        <div className="navbar px-8 border-b">
+        <div className="navbar fixed px-8 border-b z-30 glass">
           <div className="flex-1 font-semibold text-2xl">RXOFCLOCK</div>
           <LowPerformanceToggler />
         </div>
-        <Scrollbars autoHide style={{ width: '100%', height: '95vh' }}>
-          <div className="container mx-auto">
+        <Scrollbars autoHide style={{ width: '100%' }}>
+          <div className="container mx-auto mt-20">
             <SheetHelper cols={cols} />
             <div className="section">
               <div className="form-control">
@@ -240,7 +240,7 @@ const App = () => {
                 </label>
                 <div className="w-full h-100 mt-2 relative border border-black border-opacity-20 rounded-lg">
                   <UploadOverlay setTemplate={setTemplate} />
-                  <div className="absolute right-1 top-1 flex flex-row z-20">
+                  <div className="absolute right-1 top-1 flex flex-row z-10">
                     <div
                       data-tip="Download current template"
                       className="tooltip tooltip-left"
