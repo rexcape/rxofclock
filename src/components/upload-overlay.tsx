@@ -30,7 +30,7 @@ export const UploadOverlay = ({ setTemplate }: UploadOverlayProps) => {
     <>
       <div
         {...getRootProps({
-          className: 'absolute opacity-60 right-16 top-16 z-10 bg-base-200 hover:bg-base-300 transition w-1/4 h-1/2 rounded-lg cursor-pointer',
+          className: 'absolute opacity-60 right-16 top-20 z-10 bg-base-200 hover:bg-base-300 transition w-1/4 h-1/2 rounded-lg cursor-pointer',
           id: 'template-select-root'
         })}
       >

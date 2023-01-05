@@ -27,7 +27,7 @@ export const Result: FC<ResultProps> = ({ output }) => {
           </span>
         </label>
         <div className="result-container w-full h-80 mt-2 relative">
-          <div className="absolute right-12 top-4">
+          <div className="absolute right-1 top-1">
             <div data-tip="Download result" className="tooltip">
               <button
                 onClick={handleDownloadResult}

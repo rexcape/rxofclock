@@ -22,7 +22,6 @@ export const CustomHelper: FC<CustomHelperProps> = ({ helper, setHelper }) => {
               custom helpers (JavaScript)
             </span>
           </label>
-          <div className="badge uppercase ml-2">experimental</div>
         </div>
       </div>
       <div hidden={!enabled} className="w-full h-80 mt-2 relative">

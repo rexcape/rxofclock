@@ -3,39 +3,24 @@ import { useDropzone } from 'react-dropzone'
 import Handlebars from 'handlebars'
 import { utils, read as readXlsx } from 'xlsx'
 import Swal from 'sweetalert2'
-import {
-  HelperEditor,
-  SheetHelper,
-  TemplateEditor,
-  UploadOverlay,
-} from '@/components'
+import { SheetHelper, TemplateEditor, UploadOverlay } from '@/components'
 import {
   IconCopy,
   IconBolt,
   IconBraces,
   IconDownload,
-  IconBrandGithub,
   IconUpload,
 } from '@tabler/icons'
 import moment from 'moment'
 import helpers from './helpers'
+import { getTemplate } from './lib'
 import { useMyCopy, useResult, useCustomHelper } from '@/hooks'
 import { Scrollbars } from 'react-custom-scrollbars-2'
 import { saveAs } from 'file-saver'
 import '@/styles/app.css'
 import { CustomHelper, Result } from './modules'
 
-const defaultTemplate = `{{#each data}}
-{{! Your code here}}
-{{/each}}`
-
-const defaultHelper = `// Enter the code:
-// helpers['testHelper'] = () => 'Test helper!'
-// Use it in template section
-// {{testHelper}}
-// You will get the output
-// Test helper!
-`
+const defaultTemplate = `{{! Your code here}}`
 
 Handlebars.registerHelper(helpers)
 
@@ -57,8 +42,11 @@ const App = () => {
 
   const [template, setTemplate] = useState(defaultTemplate)
   const { result, setResult } = useResult()
-  const { customHelper, setCustomHelper } = useCustomHelper()
-  const [enableUserHelper, setEnableUserHelper] = useState(false)
+  const {
+    customHelper,
+    setCustomHelper,
+    reset: resetCustomHelper,
+  } = useCustomHelper()
   const [sheets, setSheets] = useState<string[] | null>(null)
   const [selectedSheet, setSelectedSheet] = useState<string | null>(null)
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
@@ -72,7 +60,7 @@ const App = () => {
     setSheets(null)
     setSelectedFile(null)
     setCols(null)
-    location.reload()
+    resetCustomHelper()
   }
 
   useEffect(() => {
@@ -130,7 +118,7 @@ const App = () => {
     }
 
     try {
-      const t = Handlebars.compile(template, { noEscape: true })
+      const t = Handlebars.compile(getTemplate(template), { noEscape: true })
       const reader = new FileReader()
       reader.onload = (e) => {
         const res = e.target?.result
@@ -139,12 +127,9 @@ const App = () => {
           readXlsx(res).Sheets[selectedSheet]
         )
         let userHelpers: { [name: string]: Function } = {}
-        if (enableUserHelper) {
+        if (customHelper) {
           type HelperFunc = (helpers: { [name: string]: Function }) => void
-          const helperFunc = new Function(
-            'helpers',
-            `${customHelper}\nreturn helpers;`
-          ) as HelperFunc
+          const helperFunc = new Function('helpers', customHelper) as HelperFunc
           helperFunc(userHelpers)
         }
         setResult(t({ data }, { helpers: userHelpers }))
@@ -172,22 +157,6 @@ const App = () => {
       >
         <div className="navbar px-8">
           <div className="flex-1 font-semibold text-2xl">RXOFCLOCK</div>
-          <div className="flex-none">
-            <a
-              href="https://rxofclock-docs.vercel.app"
-              target="_blank"
-              className="link flex justify-center items-center"
-            >
-              <span className="text-lg">doc</span>
-            </a>
-            <a
-              href="https://github.com/rexcape/rxofclock"
-              target="_blank"
-              className="btn btn-ghost btn-square ml-4"
-            >
-              <IconBrandGithub />
-            </a>
-          </div>
         </div>
         <div className="container mx-auto w-[92%]">
           <SheetHelper cols={cols} />
@@ -202,14 +171,13 @@ const App = () => {
                 <>
                   <div
                     className={[
-                      'h-20 w-full bg-gray-200 text-gray-900 dark:bg-slate-800 dark:text-gray-200',
-                      'rounded-lg mt-2 font-code p-4',
+                      'h-20 w-full bg-gray-200 text-gray-900 rounded-lg mt-2 font-code p-4',
                       'flex justify-center items-center transition',
                     ].join(' ')}
                   >
-                    <span>{selectedFile.name}</span>
+                    <span className="font-sans">{selectedFile.name}</span>
                     <button
-                      className="btn btn-outline ml-4"
+                      className="btn btn-ghost ml-4 font-sans"
                       onClick={() => {
                         setSelectedFile(null)
                       }}
@@ -276,9 +244,9 @@ const App = () => {
                   template
                 </span>
               </label>
-              <div className="w-full h-80 mt-2 relative">
+              <div className="w-full h-100 mt-2 relative border border-base-200 rounded-lg">
                 <UploadOverlay setTemplate={setTemplate} />
-                <div className="absolute right-12 top-4 flex flex-row z-20">
+                <div className="absolute right-1 top-1 flex flex-row z-20">
                   <div data-tip="Download current template" className="tooltip">
                     <button
                       onClick={handleDownloadTemplate}
@@ -299,32 +267,47 @@ const App = () => {
                     </button>
                   </div>
                 </div>
+                <div className="h-10 bg-base-200 pl-5 rounded-t-lg flex items-center">
+                  <div className="font-mono text-md">{'{{#each data}}'}</div>
+                </div>
                 <TemplateEditor value={template} onChange={setTemplate} />
+                <div className="h-10 bg-base-200 pl-5 rounded-b-lg flex items-center">
+                  <div className="font-mono text-md">{'{{/each}}'}</div>
+                </div>
               </div>
             </div>
           </div>
 
           <div className="section">
-            <button className="btn gap-2" onClick={handleGenerate}>
-              <IconBolt size={20} />
-              Generate
-            </button>
-            <button
-              className="btn btn-secondary gap-2 ml-4"
-              onClick={() => {
-                document.getElementById('template-select-root')?.click()
-              }}
+            <div className="tooltip" data-tip="Convert data to text">
+              <button className="btn gap-2" onClick={handleGenerate}>
+                <IconBolt size={20} />
+                Generate
+              </button>
+            </div>
+            <div
+              className="tooltip"
+              data-tip="Select a local file as template content"
             >
-              <IconUpload size={20} />
-              Upload
-            </button>
-            <button
-              className="btn btn-primary gap-2 ml-4"
-              onClick={handleReset}
-            >
-              <IconBraces size={20} />
-              Reset All
-            </button>
+              <button
+                className="btn btn-secondary gap-2 ml-4"
+                onClick={() => {
+                  document.getElementById('template-select-root')?.click()
+                }}
+              >
+                <IconUpload size={20} />
+                Select
+              </button>
+            </div>
+            <div className="tooltip" data-tip="Reset all states">
+              <button
+                className="btn btn-primary gap-2 ml-4"
+                onClick={handleReset}
+              >
+                <IconBraces size={20} />
+                Reset All
+              </button>
+            </div>
           </div>
 
           <Result output={result} />

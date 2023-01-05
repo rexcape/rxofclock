@@ -14,19 +14,21 @@ export const TemplateEditor = (props: TemplateEditorProps) => {
   }
 
   return (
-    <Editor
-      className="p-1 px-4 border border-base-300 rounded-lg"
-      defaultLanguage="handlebars"
-      value={value}
-      onChange={handleChange}
-      options={{
-        tabSize: 2,
-        minimap: {
-          enabled: false,
-        },
-        fontSize: 16,
-      }}
-      loading={<Ring size={40} lineWeight={5} speed={2} color="black" />}
-    />
+    <div className="h-80">
+      <Editor
+        className="p-1 px-4"
+        defaultLanguage="handlebars"
+        value={value}
+        onChange={handleChange}
+        options={{
+          tabSize: 2,
+          minimap: {
+            enabled: false,
+          },
+          fontSize: 16,
+        }}
+        loading={<Ring size={40} lineWeight={5} speed={2} color="black" />}
+      />
+    </div>
   )
 }
