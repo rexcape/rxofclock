@@ -107,11 +107,6 @@ const App = () => {
     reader.readAsArrayBuffer(selectedFile)
   }, [selectedSheet, selectedFile])
 
-  useEffect(() => {
-    const storageUserHelper = localStorage.getItem('userHelper')
-    if (storageUserHelper) setCustomHelper(storageUserHelper)
-  }, [])
-
   const handleGenerate = () => {
     if (!selectedFile) {
       Swal.fire({ icon: 'error', text: 'Select a file first' })
