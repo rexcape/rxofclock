@@ -9,6 +9,8 @@ import 'react-toastify/dist/ReactToastify.min.css'
 import '@/styles/index.css'
 import { useLowPerformanceMode } from './hooks'
 
+import 'ldrs/ring'
+
 const WrappedApp = () => {
   const { lowPerformanceMode, toggle } = useLowPerformanceMode()
   return (

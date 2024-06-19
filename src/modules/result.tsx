@@ -1,5 +1,5 @@
 import { useMyCopy } from '@/hooks'
-import { IconDownload, IconCopy } from '@tabler/icons'
+import { IconDownload, IconCopy } from '@tabler/icons-react'
 import saveAs from 'file-saver'
 import moment from 'moment'
 import { FC } from 'react'

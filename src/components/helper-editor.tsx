@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import Editor, { OnChange } from '@monaco-editor/react'
-import { Ring } from '@uiball/loaders'
 import { LowPerformanceMode } from '@/contexts'
+import type {} from 'ldrs'
 
 export interface HelperEditorProps {
   value: string
@@ -39,7 +39,7 @@ export const HelperEditor = (props: HelperEditorProps) => {
               },
               fontSize: 16,
             }}
-            loading={<Ring size={40} lineWeight={5} speed={2} color="black" />}
+            loading={<l-ring size={40} speed={2} color="black" />}
           />
         )}
       </div>

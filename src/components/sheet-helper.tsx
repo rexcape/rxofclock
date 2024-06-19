@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Scrollbars from 'react-custom-scrollbars-2'
 import { useMyCopy } from '@/hooks'
-import { IconTool } from '@tabler/icons'
+import { IconTool } from '@tabler/icons-react'
 
 export const SheetHelper = ({ cols }: { cols: string[] | null }) => {
   const [show, setShow] = useState(false)

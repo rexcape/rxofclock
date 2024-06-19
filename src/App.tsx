@@ -15,7 +15,7 @@ import {
   IconBraces,
   IconDownload,
   IconUpload,
-} from '@tabler/icons'
+} from '@tabler/icons-react'
 import moment from 'moment'
 import helpers from './helpers'
 import { getTemplate } from './lib'
