@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState, useContext } from 'react'
 import { useDropzone } from 'react-dropzone'
 import Handlebars from 'handlebars'
 import { utils, read as readXlsx } from 'xlsx'
-import Swal from 'sweetalert2'
+import { toast } from 'react-toastify'
 import {
   LowPerformanceToggler,
   SheetHelper,
@@ -109,11 +109,11 @@ const App = () => {
 
   const handleGenerate = () => {
     if (!selectedFile) {
-      Swal.fire({ icon: 'error', text: 'Select a file first' })
+      toast.error('Select a file first')
       return
     }
     if (!selectedSheet) {
-      Swal.fire({ icon: 'error', text: 'Select a sheet' })
+      toast.error('Select a sheet')
       return
     }
 
@@ -136,7 +136,7 @@ const App = () => {
       }
       reader.readAsArrayBuffer(selectedFile)
     } catch (e) {
-      Swal.fire({ title: 'Error', text: 'Template error' })
+      toast.error('Template error')
     }
   }
 
@@ -152,7 +152,7 @@ const App = () => {
           <LowPerformanceToggler />
         </div>
         <Scrollbars autoHide style={{ width: '100%' }}>
-          <div className="container mx-auto mt-20">
+          <div className="container mx-auto mt-20 px-6">
             <SheetHelper cols={cols} />
             <div className="section">
               <div className="form-control">
@@ -171,7 +171,7 @@ const App = () => {
                     >
                       <span className="font-sans">{selectedFile.name}</span>
                       <button
-                        className="btn btn-ghost ml-4 font-sans"
+                        className="btn btn-ghost ml-4"
                         onClick={() => {
                           setSelectedFile(null)
                         }}
@@ -247,7 +247,7 @@ const App = () => {
                     >
                       <button
                         onClick={handleDownloadTemplate}
-                        className="btn btn-square btn-ghost btn-sm "
+                        className="btn btn-square btn-ghost btn-sm"
                       >
                         <IconDownload size={20} />
                       </button>
@@ -258,7 +258,7 @@ const App = () => {
                     >
                       <button
                         onClick={() => myCopy(template)}
-                        className="btn btn-square btn-ghost btn-sm "
+                        className="btn btn-square btn-ghost btn-sm"
                       >
                         <IconCopy size={20} />
                       </button>
@@ -276,14 +276,14 @@ const App = () => {
             </div>
 
             <div className="section">
-              <div className="tooltip" data-tip="Convert data to text">
+              <div className="tooltip tooltip-right" data-tip="Convert data to text">
                 <button className="btn gap-2" onClick={handleGenerate}>
                   <IconBolt size={20} />
                   Generate
                 </button>
               </div>
               <div
-                className="tooltip"
+                className="tooltip tooltip-right"
                 data-tip="Select a local file as template content"
               >
                 <button
@@ -296,7 +296,7 @@ const App = () => {
                   Select
                 </button>
               </div>
-              <div className="tooltip" data-tip="Reset all states">
+              <div className="tooltip tooltip-right" data-tip="Reset all states">
                 <button
                   className="btn btn-primary gap-2 ml-4"
                   onClick={handleReset}

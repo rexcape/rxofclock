@@ -17,6 +17,7 @@ module.exports = {
         'sans-serif',
       ],
       mono: [
+        '"Victor Mono"',
         '"Noto Mono"',
         '"DejaVu Sans Mono"',
         '"Courier Prime Code"',
@@ -26,6 +27,9 @@ module.exports = {
       ],
     },
     extend: {},
+  },
+  daisyui: {
+    themes: ['emerald'],
   },
   plugins: [require('daisyui')],
 }
