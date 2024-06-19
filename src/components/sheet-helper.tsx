@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import Scrollbars from 'react-custom-scrollbars-2'
+
 import { useMyCopy } from '@/hooks'
 import { IconTool } from '@tabler/icons-react'
 
@@ -15,17 +15,17 @@ export const SheetHelper = ({ cols }: { cols: string[] | null }) => {
         }
         onClick={() => setShow(!show)}
       >
-        <IconTool color="black" size={20} />
+        <IconTool color="black" size={16} />
       </button>
       {show && (
         <div
           className={
-            'card card-bordered glass w-1/3 h-96 fixed bottom-16 right-8 z-20'
+            'card card-bordered glass w-1/3 h-80 fixed bottom-16 right-8 z-20'
           }
         >
           <div className="card-body">
             <h2 className="card-title uppercase">helper</h2>
-            <Scrollbars style={{ width: '100%', height: '100%' }}>
+            <div className="max-h-60 grid grid-cols-1 gap-y-2 overflow-y-auto">
               {cols ? (
                 <>
                   <ul className="menu menu-compact rounded-box p-2 mr-2">
@@ -45,9 +45,7 @@ export const SheetHelper = ({ cols }: { cols: string[] | null }) => {
                 </>
               ) : (
                 <>
-                  <div
-                    className="w-full h-full flex items-center justify-center"
-                  >
+                  <div className="w-full h-full flex items-center justify-center">
                     <span className="text-xl text-center font-bold">
                       NO COLS
                       <br />
@@ -56,7 +54,7 @@ export const SheetHelper = ({ cols }: { cols: string[] | null }) => {
                   </div>
                 </>
               )}
-            </Scrollbars>
+            </div>
           </div>
         </div>
       )}

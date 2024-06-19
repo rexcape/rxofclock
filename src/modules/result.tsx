@@ -33,7 +33,7 @@ export const Result: FC<ResultProps> = ({ output }) => {
                 onClick={handleDownloadResult}
                 className="btn btn-square btn-ghost btn-sm "
               >
-                <IconDownload size={20} />
+                <IconDownload size={16} />
               </button>
             </div>
             <div data-tip="Copy result to clipboard" className="tooltip tooltip-left ml-2">
@@ -41,7 +41,7 @@ export const Result: FC<ResultProps> = ({ output }) => {
                 onClick={handleCopy}
                 className="btn btn-square btn-ghost btn-sm"
               >
-                <IconCopy size={20} />
+                <IconCopy size={16} />
               </button>
             </div>
           </div>
