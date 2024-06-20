@@ -1,7 +1,7 @@
 import { useMyCopy } from '@/hooks'
 import { IconDownload, IconCopy } from '@tabler/icons-react'
 import saveAs from 'file-saver'
-import moment from 'moment'
+import dayjs from 'dayjs'
 import { FC } from 'react'
 
 export interface ResultProps {
@@ -15,7 +15,7 @@ export const Result: FC<ResultProps> = ({ output }) => {
   }
   const handleDownloadResult = () => {
     const blob = new Blob([output], { type: 'text/plain;charset=utf-8' })
-    saveAs(blob, `result_${moment().format('YYYY_MM_DD_HH:mm:ss')}.txt`)
+    saveAs(blob, `result_${dayjs().format('result_YYYY_MM_DD_HH_mm_ss')}.txt`)
   }
 
   return (
