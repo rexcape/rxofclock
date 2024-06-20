@@ -1,7 +1,6 @@
 import { useContext } from 'react'
 import Editor, { OnChange } from '@monaco-editor/react'
 import { LowPerformanceMode } from '@/contexts'
-import type {} from 'ldrs'
 
 export interface HelperEditorProps {
   value: string
@@ -38,8 +37,9 @@ export const HelperEditor = (props: HelperEditorProps) => {
                 enabled: false,
               },
               fontSize: 16,
+              fontFamily: "'Fira Code', 'Victor Mono', monospace",
             }}
-            loading={<l-ring size={40} speed={2} color="black" />}
+            loading={<span className="loading loading-spinner loading-lg" />}
           />
         )}
       </div>

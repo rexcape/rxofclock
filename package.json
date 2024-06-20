@@ -13,7 +13,6 @@
     "@tabler/icons-react": "^3.6.0",
     "file-saver": "^2.0.5",
     "handlebars": "^4.7.8",
-    "ldrs": "^1.0.2",
     "lodash": "^4.17.21",
     "lodash-es": "^4.17.21",
     "moment": "^2.30.1",
