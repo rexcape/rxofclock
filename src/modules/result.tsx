@@ -22,7 +22,7 @@ export const Result: FC<ResultProps> = ({ output }) => {
     <div className="section mb-10">
       <div className="form-control">
         <label htmlFor="result">
-          <span className="label-text uppercase text-xs font-semibold">
+          <span className="label-text uppercase text-xl font-semibold">
             result
           </span>
         </label>
@@ -31,7 +31,7 @@ export const Result: FC<ResultProps> = ({ output }) => {
             <div data-tip="Download result" className="tooltip tooltip-left">
               <button
                 onClick={handleDownloadResult}
-                className="btn btn-square btn-ghost btn-sm "
+                className="btn btn-square btn-ghost btn-sm"
               >
                 <IconDownload size={16} />
               </button>
@@ -47,7 +47,7 @@ export const Result: FC<ResultProps> = ({ output }) => {
           </div>
           <textarea
             id="result"
-            className="textarea textarea-bordered w-full h-80 font-mono text-lg resize-none"
+            className="textarea textarea-bordered w-full h-80 font-mono text-xs resize-none"
             value={output}
             readOnly
           ></textarea>
