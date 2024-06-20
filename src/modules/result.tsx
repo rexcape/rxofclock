@@ -22,7 +22,7 @@ export const Result: FC<ResultProps> = ({ output }) => {
     <div className="section mb-10">
       <div className="form-control">
         <label htmlFor="result">
-          <span className="label-text uppercase text-xl font-semibold">
+          <span className="label-text uppercase text-xs font-semibold">
             result
           </span>
         </label>
