@@ -1,9 +1,8 @@
-import { camelCase, snakeCase } from 'lodash-es'
+import _ from 'lodash'
 
 export const getTemplate = (content: string) =>
   `{{#each data}}\n${content}\n{{/each}}`
 
 export const registerGlobal = () => {
-  globalThis._.camelCase = camelCase
-  globalThis._.snakeCase = snakeCase
+  globalThis._ = _
 }
