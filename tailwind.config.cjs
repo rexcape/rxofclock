@@ -17,6 +17,7 @@ module.exports = {
         'sans-serif',
       ],
       mono: [
+        '"Fira Code"',
         '"Victor Mono"',
         '"Noto Mono"',
         '"DejaVu Sans Mono"',
@@ -29,7 +30,7 @@ module.exports = {
     extend: {},
   },
   daisyui: {
-    themes: ['corporate'],
+    themes: ['light'],
   },
   plugins: [require('daisyui')],
 }

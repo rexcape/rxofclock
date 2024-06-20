@@ -36,7 +36,7 @@ export const HelperEditor = (props: HelperEditorProps) => {
               minimap: {
                 enabled: false,
               },
-              fontSize: 16,
+              fontSize: 13,
               fontFamily: "'Fira Code', 'Victor Mono', monospace",
             }}
             loading={<span className="loading loading-spinner loading-lg" />}
