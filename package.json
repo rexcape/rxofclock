@@ -22,7 +22,6 @@
     "react-dom": "^18.3.1",
     "react-dropzone": "^14.2.3",
     "react-toastify": "^10.0.5",
-    "sweetalert2": "^11.12.0",
     "use-clipboard-api": "^0.3.4",
     "uuid": "^10.0.0",
     "xlsx": "^0.18.5"
