@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { ToastContainer } from 'react-toastify'
 import App from './App'
 import { LowPerformanceMode } from './contexts'
+import { registerGlobal } from './lib'
 
 import 'react-toastify/dist/ReactToastify.min.css'
 import '@/styles/index.css'
@@ -23,6 +24,8 @@ const WrappedApp = () => {
     </LowPerformanceMode.Provider>
   )
 }
+
+registerGlobal()
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
