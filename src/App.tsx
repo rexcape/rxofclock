@@ -15,6 +15,7 @@ import {
   IconDownload,
   IconUpload,
   IconRestore,
+  IconExclamationCircle,
 } from '@tabler/icons-react'
 import dayjs from 'dayjs'
 import helpers from './helpers'
@@ -56,6 +57,7 @@ const App = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [cols, setCols] = useState<string[] | null>(null)
   const myCopy = useMyCopy()
+  const [err, setErr] = useState<{ title: string; msg: string } | null>(null)
 
   const handleReset = () => {
     setResult('')
@@ -128,10 +130,31 @@ const App = () => {
         let userHelpers: { [name: string]: Function } = {}
         if (customHelper) {
           type HelperFunc = (helpers: { [name: string]: Function }) => void
-          const helperFunc = new Function('helpers', customHelper) as HelperFunc
-          helperFunc(userHelpers)
+          try {
+            const helperFunc = new Function(
+              'helpers',
+              customHelper
+            ) as HelperFunc
+            helperFunc(userHelpers)
+          } catch (e) {
+            if (e instanceof Error) {
+              setErr({ title: 'Custom helper error', msg: e.message })
+            } else {
+              setErr({ title: 'Custom helper error', msg: 'Unknown error' })
+            }
+            return
+          }
         }
-        setResult(t({ data }, { helpers: userHelpers }))
+        try {
+          setErr(null)
+          setResult(t({ data }, { helpers: userHelpers }))
+        } catch (e) {
+          if (e instanceof Error) {
+            setErr({ title: 'Generate error', msg: e.message })
+          } else {
+            setErr({ title: 'Generate error', msg: 'Unknown error' })
+          }
+        }
       }
       reader.readAsArrayBuffer(selectedFile)
     } catch (e) {
@@ -141,7 +164,10 @@ const App = () => {
 
   const handleDownloadTemplate = () => {
     const blob = new Blob([template], { type: 'text/plain;charset=utf-8' })
-    saveAs(blob, `template_${dayjs().format('template_YYYY_MM_DD_HH_mm_ss')}.txt`)
+    saveAs(
+      blob,
+      `template_${dayjs().format('template_YYYY_MM_DD_HH_mm_ss')}.txt`
+    )
   }
   return (
     <>
@@ -308,6 +334,20 @@ const App = () => {
               </button>
             </div>
           </div>
+
+          {err && (
+            <>
+              <div className="section">
+                <div role="alert" className="alert alert-error">
+                  <IconExclamationCircle />
+                  <div>
+                    <h3 className="font-bold">{err.title}</h3>
+                    <div className="text-xs font-mono">{err.msg}</div>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
 
           <Result output={result} />
 
