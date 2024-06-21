@@ -177,7 +177,7 @@ const App = () => {
           <LowPerformanceToggler />
         </div>
 
-        <div className="container mx-auto mt-20 px-8 2xl:px-4">
+        <div className="container mx-auto px-8 2xl:px-4">
           <SheetHelper cols={cols} />
           <div className="section">
             <div className="form-control">
