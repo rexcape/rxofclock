@@ -1,13 +1,10 @@
-import { toast } from 'react-toastify'
-import useClipboardApi from 'use-clipboard-api'
+import toast from '@/toast'
+import { useClipboard } from '@mantine/hooks'
 
 export const useMyCopy = () => {
-  const [_, copy] = useClipboardApi()
+  const { copy } = useClipboard()
   return (val: string) => {
     copy(val)
-    toast.success('copied!', {
-      position: 'top-center',
-      autoClose: 1000,
-    })
+    toast.success('copied!')
   }
 }

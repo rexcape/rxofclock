@@ -1,11 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 const defaultHelper = `/* Enter the code:
-helpers['testHelper'] = () => 'Test helper!'
+helpers['hello'] = (val) => 'Hello ' + val
 Use it in template section
-{{testHelper}}
+{{hello [fruit]}}
 You will get the output
-Test helper! */
+Hello apple
+Hello banana
+Hello orange */
 `
 
 export const useCustomHelper = () => {

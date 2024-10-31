@@ -1,0 +1,79 @@
+@import url('https://fonts.cdnfonts.com/css/inter');
+@import url('https://fonts.cdnfonts.com/css/anonymous-pro');
+
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.header {
+  height: rem(56px);
+  border-bottom: rem(1px) solid
+    light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  backdrop-filter: blur(6px);
+}
+
+.header-link {
+  display: block;
+  line-height: 1;
+  padding: rem(8px) rem(12px);
+  border-radius: var(--mantine-radius-sm);
+  text-decoration: none;
+  color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-0));
+  font-size: var(--mantine-font-size-sm);
+  font-weight: 500;
+
+  @mixin hover {
+    background-color: light-dark(
+      var(--mantine-color-gray-0),
+      var(--mantine-color-dark-6)
+    );
+  }
+}
+
+.code-editor {
+  min-height: 320px;
+  border: 1px solid var(--mantine-color-default-border);
+  padding: 4px;
+}
+
+.code-editor.rounded {
+  border-radius: var(--mantine-radius-default);
+}
+
+.code-editor.inline {
+  border-top: none;
+  border-bottom: none;
+}
+
+.template-input-wrapper {
+  border-radius: var(--mantine-radius-default);
+  border: 1px solid var(--mantine-color-default-border);
+  font-size: var(--mantine-font-size-sm);
+  color: var(--mantine-color-dimmed);
+}
+
+.template-input-wrapper.top {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom: none;
+}
+
+.template-input-wrapper.bottom {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top: none;
+}
+
+.sheet-helper-card {
+  cursor: pointer;
+}
+
+.sheet-helper-card:hover {
+  background-color: var(--mantine-color-default-hover);
+}

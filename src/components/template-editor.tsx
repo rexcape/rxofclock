@@ -1,6 +1,7 @@
-import { useContext } from 'react'
 import Editor, { OnChange } from '@monaco-editor/react'
-import { LowPerformanceMode } from '@/contexts'
+import { useAtomValue } from 'jotai'
+import { lowPerformanceModeAtom } from '@/store'
+import { Loader, Textarea, useMantineTheme } from '@mantine/core'
 
 export interface TemplateEditorProps {
   value: string
@@ -10,7 +11,8 @@ export interface TemplateEditorProps {
 export const TemplateEditor = (props: TemplateEditorProps) => {
   const { value, onChange } = props
 
-  const { active } = useContext(LowPerformanceMode)
+  const active = useAtomValue(lowPerformanceModeAtom)
+  const theme = useMantineTheme()
 
   const handleChange: OnChange = (val) => {
     onChange(val || '')
@@ -18,31 +20,31 @@ export const TemplateEditor = (props: TemplateEditorProps) => {
 
   return (
     <>
-      <div className="h-80">
-        {active ? (
-          <textarea
-            className="textarea textarea-bordered border-none focus:outline-none rounded-none w-full h-80 font-mono resize-none"
-            onChange={(e) => onChange(e.target.value ?? '')}
-            value={value}
-          />
-        ) : (
-          <Editor
-            className="p-1 px-4"
-            defaultLanguage="handlebars"
-            value={value}
-            onChange={handleChange}
-            options={{
-              tabSize: 2,
-              minimap: {
-                enabled: false,
-              },
-              fontSize: 13,
-              fontFamily: "'Fira Code', 'Victor Mono', monospace",
-            }}
-            loading={<span className="loading loading-spinner loading-lg" />}
-          />
-        )}
-      </div>
+      {active ? (
+        <Textarea
+          ff="monospace"
+          radius="none"
+          rows={10}
+          onChange={(e) => onChange(e.target.value ?? '')}
+          value={value}
+        />
+      ) : (
+        <Editor
+          className="code-editor inline"
+          defaultLanguage="handlebars"
+          value={value}
+          onChange={handleChange}
+          options={{
+            tabSize: 2,
+            minimap: {
+              enabled: false,
+            },
+            fontSize: 16,
+            fontFamily: theme.fontFamilyMonospace,
+          }}
+          loading={<Loader />}
+        />
+      )}
     </>
   )
 }

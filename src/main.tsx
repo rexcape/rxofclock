@@ -1,33 +1,25 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { ToastContainer } from 'react-toastify'
-import App from './App'
-import { LowPerformanceMode } from './contexts'
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import { Notifications } from '@mantine/notifications'
+import { MantineProvider } from '@mantine/core'
+import App from './app'
 import { registerGlobal } from './lib'
 
-import 'react-toastify/dist/ReactToastify.min.css'
-import '@/styles/index.css'
-import { useLowPerformanceMode } from './hooks'
+import theme from './theme'
 
-const WrappedApp = () => {
-  const { lowPerformanceMode, toggle } = useLowPerformanceMode()
-  return (
-    <LowPerformanceMode.Provider
-      value={{
-        active: lowPerformanceMode,
-        toggle,
-      }}
-    >
-      <App />
-    </LowPerformanceMode.Provider>
-  )
-}
+import '@mantine/core/styles.css'
+import '@mantine/dropzone/styles.css'
+import '@mantine/notifications/styles.css'
+
+import './globals.css'
 
 registerGlobal()
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <WrappedApp />
-    <ToastContainer position="top-center" autoClose={2000} />
-  </React.StrictMode>
+createRoot(document.getElementById('root') as HTMLElement).render(
+  <StrictMode>
+    <MantineProvider theme={theme}>
+      <App />
+      <Notifications autoClose={2000} position="top-center" />
+    </MantineProvider>
+  </StrictMode>
 )

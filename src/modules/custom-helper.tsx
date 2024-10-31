@@ -1,5 +1,6 @@
 import { useState, FC } from 'react'
 import { HelperEditor } from '@/components'
+import { Stack, Switch, Title } from '@mantine/core'
 
 export interface CustomHelperProps {
   helper: string
@@ -9,24 +10,16 @@ export interface CustomHelperProps {
 export const CustomHelper: FC<CustomHelperProps> = ({ helper, setHelper }) => {
   const [enabled, setEnabled] = useState(false)
   return (
-    <div className="section mb-10">
-      <div className="form-control">
-        <div className="flex items-center">
-          <input
-            type="checkbox"
-            className="toggle mr-2"
-            onChange={(e) => setEnabled(e.target.checked)}
-          />
-          <label htmlFor="userHelper">
-            <span className="label-text uppercase text-xl font-semibold">
-              custom helpers (JavaScript)
-            </span>
-          </label>
-        </div>
-      </div>
-      <div hidden={!enabled} className="w-full h-80 mt-2 relative">
-        <HelperEditor value={helper} onChange={setHelper} />
-      </div>
-    </div>
+    <Stack gap="xs">
+      <Switch
+        label={<Title order={3}>Custom Helpers (JavaScript)</Title>}
+        size="lg"
+        checked={enabled}
+        onChange={(e) => {
+          setEnabled(e.target.checked)
+        }}
+      />
+      {enabled && <HelperEditor value={helper} onChange={setHelper} />}
+    </Stack>
   )
 }

@@ -1,6 +1,7 @@
-import { useContext } from 'react'
 import Editor, { OnChange } from '@monaco-editor/react'
-import { LowPerformanceMode } from '@/contexts'
+import { Box, Loader, Textarea, useMantineTheme } from '@mantine/core'
+import { useAtomValue } from 'jotai'
+import { lowPerformanceModeAtom } from '@/store'
 
 export interface HelperEditorProps {
   value: string
@@ -10,39 +11,37 @@ export interface HelperEditorProps {
 export const HelperEditor = (props: HelperEditorProps) => {
   const { value, onChange } = props
 
-  const { active } = useContext(LowPerformanceMode)
+  const active = useAtomValue(lowPerformanceModeAtom)
+  const theme = useMantineTheme()
 
   const handleChange: OnChange = (val) => {
     onChange(val || '')
   }
 
   return (
-    <>
-      <div className="h-80">
-        {active ? (
-          <textarea
-            className="textarea textarea-bordered w-full h-80 font-mono resize-none"
-            onChange={(e) => onChange(e.target.value ?? '')}
-            value={value}
-          />
-        ) : (
-          <Editor
-            className="p-1 px-4 border border-base-300 rounded-lg"
-            defaultLanguage="javascript"
-            value={value}
-            onChange={handleChange}
-            options={{
-              tabSize: 2,
-              minimap: {
-                enabled: false,
-              },
-              fontSize: 13,
-              fontFamily: "'Fira Code', 'Victor Mono', monospace",
-            }}
-            loading={<span className="loading loading-spinner loading-lg" />}
-          />
-        )}
-      </div>
-    </>
+    <Box>
+      {active ? (
+        <Textarea
+          onChange={(e) => onChange(e.target.value ?? '')}
+          value={value}
+        />
+      ) : (
+        <Editor
+          className="code-editor rounded"
+          defaultLanguage="javascript"
+          value={value}
+          onChange={handleChange}
+          options={{
+            tabSize: 2,
+            minimap: {
+              enabled: false,
+            },
+            fontSize: 16,
+            fontFamily: theme.fontFamilyMonospace,
+          }}
+          loading={<Loader />}
+        />
+      )}
+    </Box>
   )
 }
