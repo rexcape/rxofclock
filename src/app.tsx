@@ -13,13 +13,12 @@ import {
   IconDownload,
   IconRestore,
   IconExclamationCircle,
-  IconHelpHexagon,
 } from '@tabler/icons-react'
 import dayjs from 'dayjs'
 import { saveAs } from 'file-saver'
 import helpers from './helpers'
 import { getTemplate } from './lib'
-import { useMyCopy, useResult, useCustomHelper, useDocsDrawer } from '@/hooks'
+import { useMyCopy, useResult, useCustomHelper } from '@/hooks'
 import { CustomHelper, FileSelect, Result, TemplateInput } from './modules'
 import toast from '@/toast'
 
@@ -35,7 +34,6 @@ import {
   Stack,
   Title,
 } from '@mantine/core'
-import { DocsDrawer } from './docs/docs-drawer'
 
 const defaultTemplate = `{{! Your code here}}`
 
@@ -60,9 +58,6 @@ const App = () => {
   const [selectedFile, setSelectedFile] = useState<File | undefined>()
   const [cols, setCols] = useState<string[] | null>(null)
   const [err, setErr] = useState<{ title: string; msg: string } | null>(null)
-
-  const { tab, docsDrawerOpened, openDocsDrawer, closeDocsDrawer } =
-    useDocsDrawer()
 
   const handleReset = () => {
     setResult('')
@@ -169,25 +164,9 @@ const App = () => {
 
   return (
     <>
-      <DocsDrawer
-        opened={docsDrawerOpened}
-        onClose={closeDocsDrawer}
-        tab={tab}
-      />
       <Flex className="header" align="center" px="xl" component="nav">
         <Title order={2} style={{ flex: '1' }}>
           rxofclock
-          <ActionIcon
-            ml={8}
-            size="md"
-            variant="subtle"
-            color="gray"
-            onClick={() => {
-              openDocsDrawer('intro')
-            }}
-          >
-            <IconHelpHexagon size={20} />
-          </ActionIcon>
         </Title>
         <Group mx="lg">
           {links.map((item, idx) => (
@@ -220,20 +199,7 @@ const App = () => {
               data={sheets}
               disabled={!selectedFile}
             />
-            <Title order={3}>
-              Template{' '}
-              <ActionIcon
-                ml={8}
-                size="md"
-                variant="subtle"
-                color="gray"
-                onClick={() => {
-                  openDocsDrawer('helpers')
-                }}
-              >
-                <IconHelpHexagon size={20} />
-              </ActionIcon>
-            </Title>
+            <Title order={3}>Template</Title>
             <TemplateInput template={template} setTemplate={setTemplate} />
             <Group>
               <Button

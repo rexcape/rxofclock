@@ -2,7 +2,7 @@ import { MantineTheme } from '@mantine/core'
 
 const theme: Partial<MantineTheme> = {
   fontFamily: '"Inter", sans-serif',
-  fontFamilyMonospace: '"PT Mono", monospace',
+  fontFamilyMonospace: '"Anonymous Pro", monospace',
   primaryColor: 'indigo',
   defaultRadius: 'md',
 }
