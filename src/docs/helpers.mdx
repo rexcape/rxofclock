@@ -1,0 +1,81 @@
+# Helpers
+
+import { Stack } from '@mantine/core'
+import { HelperCard } from './helper-card'
+
+The helpers is a way that handlebars provides for convinent. There are three types:
+
+- Handlebars builtin helpers
+- Rxofclock builtin helpers
+- User defined helpers
+
+## Handlebars builtin helpers
+
+Please visit [the official doc](https://handlebarsjs.com/guide/builtin-helpers.html) for more info
+
+## Rxofclock builtin helpers
+
+### String helpers
+
+<Stack>
+  <HelperCard
+    title="trim"
+    description="Remove white spaces before and end in a string"
+    usage="{{trim [colName]}}"
+    value="'  some value  '"
+    output="'some value'"
+  />
+  <HelperCard
+    title="trimStart"
+    description="Remove white spaces before a string"
+    usage="{{trimStart [colName]}}"
+    value="'  some value  '"
+    output="'some value  '"
+  />
+  <HelperCard
+    title="trimEnd"
+    description="Remove white spaces end in a string"
+    usage="{{trimEnd [colName]}}"
+    value="'  some value  '"
+    output="'  some value'"
+  />
+</Stack>
+
+### Number helpers
+
+<Stack>
+  <HelperCard
+    title="toFixed(n)"
+    description="Convert a number to fixed string"
+    usage="{{toFixed [colName] 2}}"
+    value="31.25367"
+    output="31.25"
+  />
+</Stack>
+
+### Random helpers
+
+<Stack>
+  <HelperCard
+    title="UUID"
+    description="Generate a UUIDv4"
+    usage="{{UUID}}"
+    output="df81986a-d440-432b-8d8e-c71e50d72551"
+  />
+  <HelperCard
+    title="simpleUUID"
+    description="Generate a UUIDv4 without `-` symbols"
+    usage="{{simpleUUID}}"
+    output="df81986ad440432b8d8ec71e50d72551"
+  />
+  <HelperCard
+    title="nanoid"
+    description="Generate a nanoid"
+    usage="{{nanoid}}"
+    output="m91n7air42korjAMpwNW-"
+  />
+</Stack>
+
+## User defined helpers
+
+Please take a look at Custom Helpers(JavaScript) in this page
