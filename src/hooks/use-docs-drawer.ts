@@ -1,7 +1,7 @@
 import { useDisclosure } from '@mantine/hooks'
 import { useCallback, useState } from 'react'
 
-export type DocsDrawerTab = 'intro' | 'helpers'
+export type DocsDrawerTab = 'intro' | 'helpers' | 'custom-helpers'
 
 export const useDocsDrawer = () => {
   const [tab, setTab] = useState<DocsDrawerTab>('intro')

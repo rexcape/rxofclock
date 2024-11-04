@@ -3,14 +3,7 @@ import { IconDownload, IconCopy } from '@tabler/icons-react'
 import saveAs from 'file-saver'
 import dayjs from 'dayjs'
 import { FC } from 'react'
-import {
-  Textarea,
-  ActionIcon,
-  Box,
-  Group,
-  useMantineTheme,
-  px,
-} from '@mantine/core'
+import { Textarea, ActionIcon, Box, useMantineTheme, px } from '@mantine/core'
 
 export interface ResultProps {
   output: string
@@ -24,7 +17,7 @@ export const Result: FC<ResultProps> = ({ output }) => {
   }
   const handleDownloadResult = () => {
     const blob = new Blob([output], { type: 'text/plain;charset=utf-8' })
-    saveAs(blob, `result_${dayjs().format('result_YYYY_MM_DD_HH_mm_ss')}.txt`)
+    saveAs(blob, `result_${dayjs().format('YYYY_MM_DD_HH_mm_ss')}.txt`)
   }
 
   return (

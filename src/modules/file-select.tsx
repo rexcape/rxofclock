@@ -62,7 +62,7 @@ export const FileSelect: FC<FileSelectProps> = ({ file, onSelect }) => {
           <div>
             <Text size="xl" inline>
               Drag a .xlsx/.xls file here or click to{' '}
-              {!!file ? 'replace' : 'select'} file
+              {!!file ? 'replace current' : 'select'} file
             </Text>
             <Text size="sm" c="dimmed" inline mt={7}>
               The max file size is 5MB
@@ -70,7 +70,7 @@ export const FileSelect: FC<FileSelectProps> = ({ file, onSelect }) => {
           </div>
         </Group>
       </Dropzone>
-      {file && <Text style={{ flex: 1 }}>Current file: {file.name}</Text>}
+      {file && <Text size="lg" style={{ flex: 1 }}>Current file: {file.name}</Text>}
     </Stack>
   )
 }

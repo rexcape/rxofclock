@@ -1,5 +1,5 @@
 import { useMyCopy } from '@/hooks'
-import { IconTool } from '@tabler/icons-react'
+import { IconTools } from '@tabler/icons-react'
 import {
   ActionIcon,
   Affix,
@@ -21,8 +21,8 @@ export const SheetHelper = ({ cols }: { cols: string[] | null }) => {
     <Affix bottom={20} right={20}>
       <Popover>
         <Popover.Target>
-          <ActionIcon radius="xl">
-            <IconTool size={16} />
+          <ActionIcon radius="xl" variant="default">
+            <IconTools size={16} />
           </ActionIcon>
         </Popover.Target>
         <Popover.Dropdown>
@@ -39,7 +39,7 @@ export const SheetHelper = ({ cols }: { cols: string[] | null }) => {
                       handleCopy(c)
                     }}
                   >
-                    <Text size="sm">{c}</Text>
+                    <Text size="sm">{`{{[${c}]}}`}</Text>
                   </Paper>
                 ))}
               </Stack>

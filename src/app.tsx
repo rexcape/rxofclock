@@ -2,25 +2,17 @@ import { useEffect, useState } from 'react'
 import Handlebars from 'handlebars'
 import { utils, read as readXlsx } from 'xlsx'
 
+import { HelperEditor, LowPerformanceToggler, SheetHelper } from '@/components'
 import {
-  LowPerformanceToggler,
-  SheetHelper,
-  TemplateEditor,
-} from '@/components'
-import {
-  IconCopy,
   IconBolt,
-  IconDownload,
-  IconRestore,
+  IconArrowBackUp,
   IconExclamationCircle,
   IconHelpHexagon,
 } from '@tabler/icons-react'
-import dayjs from 'dayjs'
-import { saveAs } from 'file-saver'
 import helpers from './helpers'
 import { getTemplate } from './lib'
-import { useMyCopy, useResult, useCustomHelper, useDocsDrawer } from '@/hooks'
-import { CustomHelper, FileSelect, Result, TemplateInput } from './modules'
+import { useResult, useCustomHelper, useDocsDrawer } from '@/hooks'
+import { FileSelect, Result, TemplateInput } from './modules'
 import toast from '@/toast'
 
 import {
@@ -179,7 +171,7 @@ const App = () => {
           rxofclock
           <ActionIcon
             ml={8}
-            size="md"
+            size="lg"
             variant="subtle"
             color="gray"
             onClick={() => {
@@ -221,10 +213,10 @@ const App = () => {
               disabled={!selectedFile}
             />
             <Title order={3}>
-              Template{' '}
+              Template
               <ActionIcon
                 ml={8}
-                size="md"
+                size="lg"
                 variant="subtle"
                 color="gray"
                 onClick={() => {
@@ -235,16 +227,20 @@ const App = () => {
               </ActionIcon>
             </Title>
             <TemplateInput template={template} setTemplate={setTemplate} />
-            <Group>
+            <Group grow>
               <Button
                 onClick={handleGenerate}
-                leftSection={<IconBolt size={16} />}
+                leftSection={<IconBolt size={20} />}
+                size="lg"
               >
                 Generate
               </Button>
               <Button
                 onClick={handleReset}
-                leftSection={<IconRestore size={16} />}
+                color="orange"
+                variant="light"
+                leftSection={<IconArrowBackUp size={20} />}
+                size="lg"
               >
                 Reset All
               </Button>
@@ -262,7 +258,21 @@ const App = () => {
             )}
             <Title order={3}>Result</Title>
             <Result output={result} />
-            <CustomHelper helper={customHelper} setHelper={setCustomHelper} />
+            <Title order={3}>
+              Custom Helpers (JavaScript)
+              <ActionIcon
+                ml={8}
+                size="lg"
+                variant="subtle"
+                color="gray"
+                onClick={() => {
+                  openDocsDrawer('custom-helpers')
+                }}
+              >
+                <IconHelpHexagon size={20} />
+              </ActionIcon>
+            </Title>
+            <HelperEditor value={customHelper} onChange={setCustomHelper} />
           </Stack>
         </Container>
       </main>
