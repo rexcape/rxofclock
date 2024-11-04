@@ -9,6 +9,7 @@
     "preview": "rsbuild preview"
   },
   "dependencies": {
+    "@mantine/code-highlight": "^7.13.4",
     "@mantine/core": "^7.13.4",
     "@mantine/dropzone": "^7.13.4",
     "@mantine/hooks": "^7.13.4",

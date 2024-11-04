@@ -1,4 +1,4 @@
-import { Paper, Stack, Title, Text, List, Code } from '@mantine/core'
+import { Paper, Text, List, Code } from '@mantine/core'
 import { FC } from 'react'
 
 export interface HelperCardProps {

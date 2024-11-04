@@ -4,7 +4,7 @@ import { DocsDrawerTab } from '@/hooks'
 
 import Intro from './intro.md'
 import Helpers from './helpers.mdx'
-import CustomHelpers from './custom-helpers.md'
+import CustomHelpers from './custom-helpers.mdx'
 
 export interface DocsDrawerProps {
   tab: DocsDrawerTab

@@ -22,9 +22,8 @@ export const TemplateEditor = (props: TemplateEditorProps) => {
     <>
       {active ? (
         <Textarea
-          ff="monospace"
           radius="none"
-          rows={10}
+          rows={15}
           onChange={(e) => onChange(e.target.value ?? '')}
           value={value}
         />

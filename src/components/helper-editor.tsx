@@ -22,8 +22,7 @@ export const HelperEditor = (props: HelperEditorProps) => {
     <Box>
       {active ? (
         <Textarea
-          rows={10}
-          ff="monospace"
+          rows={15}
           onChange={(e) => onChange(e.target.value ?? '')}
           value={value}
         />
