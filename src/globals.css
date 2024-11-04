@@ -77,3 +77,7 @@ body {
 .sheet-helper-card:hover {
   background-color: var(--mantine-color-default-hover);
 }
+
+.textarea-code-editor .mantine-Textarea-input {
+  font-family: var(--mantine-font-family-monospace);
+}

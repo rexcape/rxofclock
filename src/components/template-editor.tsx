@@ -22,6 +22,7 @@ export const TemplateEditor = (props: TemplateEditorProps) => {
     <>
       {active ? (
         <Textarea
+          className="textarea-code-editor"
           radius="none"
           rows={15}
           onChange={(e) => onChange(e.target.value ?? '')}
