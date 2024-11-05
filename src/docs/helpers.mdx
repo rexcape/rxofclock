@@ -1,8 +1,24 @@
-# Helpers
+# Template
 
 import { Stack } from '@mantine/core'
 import { HelperCard } from './helper-card'
 import { DocLink } from './doc-link'
+
+Use the template editor to shape the text to generate. The basic usage of the column value is `{{[columnName]}}`. For example, you can use the template below to generate the shape of 'hello xxx(the column values)':
+
+```handlebars
+hello {{[userName]}}
+```
+
+You can use the `@data` variables in your template(<DocLink href="https://handlebarsjs.com/api-reference/data-variables.html#root">docs here</DocLink>):
+
+- `@root`: Initial context with which the template was executed. `{{#each array}} {{@root.foo}} {{/each}}`
+- `@first`: Set to true by the each helper for the first step of iteration. `{{#each array}} {{#if @first}} First! {{/if}} {{/each}}`
+- `@index`: Zero-based index for the current iteration step. Set by the `each` helper. `{{#each array}} {{@index}} {{/each}}`
+- `@key`: Key name for the current iteration step. Set by the each helper when iterating over objects. `{{#each array}} {{@key}} {{/each}}`
+- `@last`: Set to true by the each helper for the last step of iteration. `{{#each array}} {{#if @last}} Last :( {{/if}} {{/each}}`
+
+## Helpers
 
 The helpers is a way that handlebars provides for convinent. There are three types:
 
@@ -10,13 +26,13 @@ The helpers is a way that handlebars provides for convinent. There are three typ
 - Rxofclock builtin helpers
 - User defined helpers
 
-## Handlebars builtin helpers
+### Handlebars builtin helpers
 
 Please visit <DocLink href="https://handlebarsjs.com/guide/builtin-helpers.html">the official doc</DocLink> for more info
 
-## Rxofclock builtin helpers
+### Rxofclock builtin helpers
 
-### String helpers
+#### String helpers
 
 <Stack>
   <HelperCard
@@ -42,7 +58,7 @@ Please visit <DocLink href="https://handlebarsjs.com/guide/builtin-helpers.html"
   />
 </Stack>
 
-### Number helpers
+#### Number helpers
 
 <Stack>
   <HelperCard
@@ -54,7 +70,7 @@ Please visit <DocLink href="https://handlebarsjs.com/guide/builtin-helpers.html"
   />
 </Stack>
 
-### Random helpers
+#### Random helpers
 
 <Stack>
   <HelperCard
@@ -77,6 +93,6 @@ Please visit <DocLink href="https://handlebarsjs.com/guide/builtin-helpers.html"
   />
 </Stack>
 
-## User defined helpers
+### User defined custom helpers
 
 Please take a look at Custom Helpers(JavaScript) in this page
