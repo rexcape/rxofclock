@@ -5,18 +5,25 @@ import { DocLink } from './doc-link'
 
 Handlebars supports custom helpers, you can find the official doc <DocLink href="https://handlebarsjs.com/guide/#custom-helpers">here</DocLink>
 
+## Custom helper example
+
 In this application, you can register custom helpers by define properties for the `helpers` object with the editor below. Here's an example:
 
 export const codeExample = `helpers['hello'] = () => 'hello world'`
 
 <CodeHighlight code={codeExample} language="js" />
 
+## Custom helper with parameter
+
 Also you can get the column value with the first parameter:
 
 export const codeExampleWithParam = `helpers['hello'] = (val) => \`hello \${val}\`
-helpers['addTwo'] = (val) => Number(val) + 2`
+helpers['addTwo'] = (val) => Number(val) + 2
+helpers['fixed] = (val, precision) => parseFloat(val).toFixed(precision)`
 
 <CodeHighlight code={codeExampleWithParam} language="js" />
+
+## Custom helper with third party libraries
 
 For convenience, feel free to use lodash object `_` in your custom helper. You can visit <DocLink href="https://lodash.com/docs">lodash doc website</DocLink> to view all usable methods.
 
