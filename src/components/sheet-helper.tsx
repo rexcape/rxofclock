@@ -21,7 +21,7 @@ export const SheetHelper = ({ cols }: { cols: string[] | null }) => {
     <Affix bottom={20} right={20}>
       <Popover>
         <Popover.Target>
-          <ActionIcon radius="xl" variant="default">
+          <ActionIcon radius="xl" variant="default" aria-label="view all columns">
             <IconTools size={16} />
           </ActionIcon>
         </Popover.Target>

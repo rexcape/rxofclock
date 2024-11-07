@@ -28,14 +28,28 @@ export const Result: FC<ResultProps> = ({ output }) => {
         top={px(theme.spacing.sm)}
         style={{ zIndex: 2 }}
       >
-        <ActionIcon variant="default" onClick={handleDownloadResult}>
+        <ActionIcon
+          variant="default"
+          aria-label="download result"
+          onClick={handleDownloadResult}
+        >
           <IconDownload size={16} />
         </ActionIcon>
-        <ActionIcon variant="default" onClick={handleCopy}>
+        <ActionIcon
+          variant="default"
+          aria-label="copy result"
+          onClick={handleCopy}
+        >
           <IconCopy size={16} />
         </ActionIcon>
       </ActionIcon.Group>
-      <Textarea ff="monospace" value={output} readOnly rows={16} />
+      <Textarea
+        id="result-textarea"
+        ff="monospace"
+        value={output}
+        readOnly
+        rows={16}
+      />
     </Box>
   )
 }

@@ -41,18 +41,26 @@ export const TemplateInput: FC<TemplateInputProps> = ({
         top={px(theme.spacing.sm)}
         style={{ zIndex: 2 }}
       >
-        <ActionIcon variant="default" onClick={handleDownloadTemplate}>
+        <ActionIcon
+          variant="default"
+          aria-label="download template"
+          onClick={handleDownloadTemplate}
+        >
           <IconDownload size={16} />
         </ActionIcon>
-        <ActionIcon variant="default" onClick={() => myCopy(template)}>
+        <ActionIcon
+          variant="default"
+          aria-label="copt template"
+          onClick={() => myCopy(template)}
+        >
           <IconCopy size={16} />
         </ActionIcon>
       </ActionIcon.Group>
-      <Box p="sm" bg="gray.1" className="template-input-wrapper top">
+      <Box p="sm" className="template-input-wrapper top">
         <Text ff="monospace">{'{{#each data}}'}</Text>
       </Box>
       <TemplateEditor value={template} onChange={setTemplate} />
-      <Box p="sm" bg="gray.1" className="template-input-wrapper bottom">
+      <Box p="sm" className="template-input-wrapper bottom">
         <Text ff="monospace">{'{{/each}}'}</Text>
       </Box>
     </Box>

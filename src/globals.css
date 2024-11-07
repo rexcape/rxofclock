@@ -55,7 +55,8 @@ body {
   border-radius: var(--mantine-radius-default);
   border: 1px solid var(--mantine-color-default-border);
   font-size: var(--mantine-font-size-sm);
-  color: var(--mantine-color-dimmed);
+  background-color: var(--mantine-primary-color-light);
+  color: var(--mantine-primary-color-light-color);
 }
 
 .template-input-wrapper.top {

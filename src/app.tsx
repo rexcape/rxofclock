@@ -174,6 +174,7 @@ const App = () => {
             size="lg"
             variant="subtle"
             color="gray"
+            aria-label="introduction"
             onClick={() => {
               openDocsDrawer('intro')
             }}
@@ -219,6 +220,7 @@ const App = () => {
                 size="lg"
                 variant="subtle"
                 color="gray"
+                aria-label="handlebars helpers doc"
                 onClick={() => {
                   openDocsDrawer('helpers')
                 }}
@@ -256,7 +258,9 @@ const App = () => {
                 </Alert>
               </>
             )}
-            <Title order={3}>Result</Title>
+            <Title order={3}>
+              <label htmlFor="result-textarea">Result</label>
+            </Title>
             <Result output={result} />
             <Title order={3}>
               Custom Helpers (JavaScript)
@@ -265,6 +269,7 @@ const App = () => {
                 size="lg"
                 variant="subtle"
                 color="gray"
+                aria-label="custom helpers docs"
                 onClick={() => {
                   openDocsDrawer('custom-helpers')
                 }}
