@@ -39,8 +39,6 @@ export const TemplateEditor = (props: TemplateEditorProps) => {
             minimap: {
               enabled: false,
             },
-            fontSize: 16,
-            fontFamily: theme.fontFamilyMonospace,
           }}
           loading={<Loader />}
         />
