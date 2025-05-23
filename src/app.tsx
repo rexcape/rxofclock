@@ -33,11 +33,7 @@ const defaultTemplate = `{{! Your code here}}`
 
 Handlebars.registerHelper(helpers)
 
-const links = [
-  { name: 'Handlebars', href: 'https://handlebarsjs.com/' },
-  { name: 'Mantine UI', href: 'https://mantine.dev/' },
-  { name: 'GitHub', href: 'https://github.com/rexcape/rxofclock' },
-]
+const links = [{ name: 'GitHub', href: 'https://github.com/rexcape/rxofclock' }]
 
 const App = () => {
   const [template, setTemplate] = useState(defaultTemplate)
@@ -195,7 +191,6 @@ const App = () => {
             </Box>
           ))}
         </Group>
-        <LowPerformanceToggler />
       </Flex>
 
       <main>
