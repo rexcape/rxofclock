@@ -9,12 +9,12 @@
     "preview": "rsbuild preview"
   },
   "dependencies": {
-    "@mantine/code-highlight": "^7.13.4",
-    "@mantine/core": "^7.13.4",
-    "@mantine/dropzone": "^7.13.4",
-    "@mantine/hooks": "^7.13.4",
-    "@mantine/modals": "^7.13.4",
-    "@mantine/notifications": "^7.13.4",
+    "@mantine/code-highlight": "^8.0.0",
+    "@mantine/core": "^8.0.0",
+    "@mantine/dropzone": "^8.0.0",
+    "@mantine/hooks": "^8.0.0",
+    "@mantine/modals": "^8.0.0",
+    "@mantine/notifications": "^8.0.0",
     "@monaco-editor/react": "^4.7.0",
     "@tabler/icons-react": "^3.31.0",
     "clsx": "^2.1.1",
